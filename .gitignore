@@ -4,3 +4,4 @@ yarn.lock
 .cache
 .idea
 public/static/*
+.env
