@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Text, Flex, Box } from 'rebass';
-import Fade from 'react-reveal/Fade';
+import { Box } from 'rebass';
 import PropTypes from 'prop-types';
-import MateLogo from './Logo/Portfolio.svg';
+import {graphql, StaticQuery} from "gatsby";
+import {connect} from "react-redux";
 
 const FooterContainer = styled.footer`
   padding: 1em;
@@ -37,18 +37,60 @@ const Logo = ({ url, logo, alt = '' }) => (
 Logo.propTypes = {
   url: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
-  alt: PropTypes.string,
+  alt: PropTypes.string
 };
+
+
+const FooterQuery = ({language}) => (
+
+    <StaticQuery
+        query={graphql`
+        query {
+          en : allContentfulFooter(filter: { node_locale: { eq: "en-US" } }) {
+            edges {
+                node {
+                    firstLine
+                    secondLine
+                }
+            }
+          }
+  fr : allContentfulFooter(filter: { node_locale: { eq: "fr" } }) {
+            edges {
+                node {
+                    firstLine
+                    secondLine
+                }
+            }
+          }
+
+}
+      `}
+
+        render={data => {
+            const { firstLine, secondLine } = data[language].edges[0].node;
+            return (
+                <p style={{textAlign:'center'}}>
+                    {firstLine}
+                    <br />
+                    {secondLine}
+                </p>
+            )
+        }}/>
+);
+
+const mapStateToProps = ({ language }) => {
+    return { language }
+};
+
+
+const ConnectedFooterQuery = connect(
+    mapStateToProps
+)(FooterQuery);
+
 
 const Footer = () => (
   <FooterContainer>
-    <p style={{textAlign:'center'}}>
-          Developed by Loïs (alias Applelo) with ❤️
-          ️
-      <br />
-          Based on Mate template by
-      <em>emasuriano</em>
-    </p>
+      <ConnectedFooterQuery/>
   </FooterContainer>
 );
 

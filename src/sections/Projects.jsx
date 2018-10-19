@@ -1,14 +1,14 @@
 import React from 'react';
-import { Subhead, Image, Text, Flex, Label } from 'rebass';
-import { StaticQuery, graphql } from 'gatsby';
+import {Subhead, Image, Text, Flex, Label} from 'rebass';
+import {StaticQuery, graphql} from 'gatsby';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import Section from '../components/Section';
-import { CardContainer, Card } from '../components/Card';
+import {CardContainer, Card} from '../components/Card';
 import SocialLink from '../components/SocialLink';
 import ImageSubtitle from '../components/ImageSubtitle';
 import withNavigation from '../utils/withNavigation';
-
+import connect from "react-redux/es/connect/connect";
 
 
 const Title = styled(Subhead)`
@@ -67,102 +67,119 @@ const SocialLinksContainer = styled.div`
 `;
 
 const Project = ({
-  name,
-  description,
-  projectUrl,
-  repositoryUrl,
-  type,
-  publishedDate,
-  logo,
-}) => (
-  <Card p={0}>
-    <Flex css={{ height: '200px' }}>
-      <TextContainer>
+                     name,
+                     description,
+                     projectUrl,
+                     repositoryUrl,
+                     type,
+                     publishedDate,
+                     logo,
+                 }) => (
+    <Card p={0}>
+        <Flex css={{height: '200px'}}>
+            <TextContainer>
         <span>
           <Title my={2} pb={1}>
             {name}
           </Title>
         </span>
-        <Text width="100%" css={{ overflow: 'auto' }}>
-          {description}
-        </Text>
-      </TextContainer>
-      <ImageContainer>
-        <ProjectImage src={logo.image.src} alt={logo.title} />
-        <ImageSubtitle bg="primaryLight" color="white" top="13px" top-s="-37px">
-          {type}
-        </ImageSubtitle>
-        <ImageSubtitle
-          bg="backgroundDark"
-          invert="true"
-          top-s="-200px"
-          top="-227px"
-        >
-          {publishedDate}
-        </ImageSubtitle>
-        <SocialLinksContainer>
-          <Label mx={1} fontSize={5}>
-            <SocialLink
-              color="primary"
-              hoverColor="primaryLight"
-              name="Check repository"
-              fontAwesomeIcon="github"
-              url={repositoryUrl}
-            />
-          </Label>
-          <Label mx={1} fontSize={5}>
-            <SocialLink
-              color="primary"
-              hoverColor="primaryLight"
-              fontSize={5}
-              mx={1}
-              name="See project"
-              fontAwesomeIcon="globe"
-              url={projectUrl}
-            />
-          </Label>
-        </SocialLinksContainer>
-      </ImageContainer>
-    </Flex>
-  </Card>
+                <Text width="100%" css={{overflow: 'auto'}}>
+                    {description}
+                </Text>
+            </TextContainer>
+            <ImageContainer>
+                <ProjectImage src={logo.image.src} alt={logo.title}/>
+                <ImageSubtitle bg="primaryLight" color="white" top="13px" top-s="-37px">
+                    {type}
+                </ImageSubtitle>
+                <ImageSubtitle
+                    color="white"
+                    bg="primary"
+                    invert="true"
+                    top-s="-200px"
+                    top="-227px"
+                >
+                    {publishedDate}
+                </ImageSubtitle>
+                <SocialLinksContainer>
+                    <Label mx={1} fontSize={5}>
+                        <SocialLink
+                            color="primary"
+                            hoverColor="primaryLight"
+                            name="Check repository"
+                            fontAwesomeIcon="github"
+                            url={repositoryUrl}
+                        />
+                    </Label>
+                    <Label mx={1} fontSize={5}>
+                        <SocialLink
+                            color="primary"
+                            hoverColor="primaryLight"
+                            fontSize={5}
+                            mx={1}
+                            name="See project"
+                            fontAwesomeIcon="globe"
+                            url={projectUrl}
+                        />
+                    </Label>
+                </SocialLinksContainer>
+            </ImageContainer>
+        </Flex>
+    </Card>
 );
 
-const Projects = () => (
-  <Section.Container id="projects">
-    <Section.Header name="Projects" icon="💻" label="notebook" />
+const ProjectsQuery = ({language}) => (
     <StaticQuery
-      query={graphql`
+        query={graphql`
         query ProjectsQuery {
-          contentfulAbout {
-            projects {
-              id
-              name
-              description
-              projectUrl
-              repositoryUrl
-              publishedDate(formatString: "YYYY")
-              type
-              logo {
-                title
-                image: resize(width: 200, quality: 100) {
-                  src
+          allContentfulAbout(filter: { node_locale: { eq: "en-US" } }) {
+          edges {
+        	node {
+                projects {
+                    id
+                    name
+                    description
+                    projectUrl
+                    repositoryUrl
+                    publishedDate(formatString: "YYYY")
+                    type
+                    logo {
+                        title
+                        image: resize(width: 200, quality: 100) {
+                        src
+                    }
                 }
-              }
             }
           }
         }
+        }
+        }
       `}
-      render={({ contentfulAbout }) => (
-        <CardContainer minWidth="350px">
-          {contentfulAbout.projects.map((p, i) => (
-            <Fade bottom delay={i * 200}>
-              <Project key={p.id} {...p} />
-            </Fade>
-          ))}
-        </CardContainer>
-      )}
+        render={({allContentfulAbout}) => (
+            <CardContainer minWidth="350px">
+                {allContentfulAbout.edges[0].node.projects.map((p, i) => (
+                    <Fade key={p.id} bottom delay={i * 200}>
+                        <Project {...p} />
+                    </Fade>
+                ))}
+            </CardContainer>
+        )}
     />
-  </Section.Container>
 );
 
-export default withNavigation({ label: 'Projects', id: 'projects' })(Projects);
+const mapStateToProps = ({ language }) => {
+    return { language }
+};
+
+const ConnectedProjectsQuery = connect(
+    mapStateToProps
+)(ProjectsQuery);
+
+const Projects = () => (
+    <Section.Container id="projects">
+        <Section.Header name="Projects" icon="💻" label="notebook"/>
+        <ConnectedProjectsQuery/>
+    </Section.Container>
+);
+
+export default withNavigation({label: 'Projects', id: 'projects'})(Projects);

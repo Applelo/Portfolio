@@ -1,11 +1,12 @@
 import React from 'react';
 import Headroom from 'react-headroom';
-import { Flex, Image } from 'rebass';
+import {Flex, Image} from 'rebass';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import RouteLink from './RouteLink';
-import Logo from './Logo/Portfolio.svg';
-import { SectionConsumer } from './SectionContext';
+import Logo from './Logo/Logo.svg';
+import ToogleLanguage from "./ToogleLanguage";
+import {SectionConsumer} from "./SectionContext";
 
 const HeaderContainer = styled(Headroom)`
  
@@ -27,13 +28,14 @@ const Header = () => (
           <Image src={Logo} width="50px" alt="Portfolio Logo" />
         </a>
         <Flex mr={[0, 3, 5]}>
-          <SectionConsumer>
-            {({ sections }) =>
-              sections.map(({ label, id }) => (
-                <RouteLink label={label} to={id} />
-              ))
-            }
-          </SectionConsumer>
+            <SectionConsumer>
+                {({ sections }) =>
+                    sections.map(({ label, id }) => (
+                        <RouteLink key={id} label={label} to={id} />
+                    ))
+                }
+            </SectionConsumer>
+            <ToogleLanguage/>
         </Flex>
       </Flex>
     </Fade>

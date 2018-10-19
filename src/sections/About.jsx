@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import Section from '../components/Section';
 import withNavigation from '../utils/withNavigation';
+import connect from "react-redux/es/connect/connect";
 
 const AboutText = styled(Box)`
   p:first-child {
@@ -64,39 +65,66 @@ const ProfilePicture = styled(Image)`
   }
 `;
 
+const mapStateToProps = ({ language }) => {
+    return { language }
+};
+
+
+const AboutQuery = ({language}) => (
+    <StaticQuery
+        query={graphql`
+        query {
+        en : allContentfulAbout(filter: { node_locale: { eq: "en-US" } }) {
+          edges {
+          	node {
+            	aboutMe {
+              	childMarkdownRemark {
+                	html
+              	}
+            	}
+            }
+          }
+        }
+  			fr : allContentfulAbout(filter: { node_locale: { eq: "fr" } }) {
+          edges {
+          	node {
+            	aboutMe {
+              	childMarkdownRemark {
+                	html
+              	}
+            	}
+            }
+          }
+        }
+}
+      `}
+        render={data => {
+            const { aboutMe } = data[language].edges[0].node;
+            return (
+                <Flex flexWrap="wrap">
+                    <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]}>
+                        <Fade>
+                            <AboutText
+                                dangerouslySetInnerHTML={{
+                                    __html: aboutMe.childMarkdownRemark.html,
+                                }}
+                            />
+                        </Fade>
+                    </Box>
+                </Flex>
+            );
+        }}
+    />
+);
+
+const ConnectedFooterQuery = connect(
+    mapStateToProps
+)(AboutQuery);
+
 const About = () => (
   <Section.Container id="about">
     <Section.Header name="About" />
-    <StaticQuery
-      query={graphql`
-        query AboutMeQuery {
-          contentfulAbout {
-            aboutMe {
-              childMarkdownRemark {
-                html
-              }
-            }
-
-          }
-        }
-      `}
-      render={data => {
-        const { aboutMe } = data.contentfulAbout;
-        return (
-          <Flex flexWrap="wrap">
-            <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]}>
-              <Fade>
-                <AboutText
-                  dangerouslySetInnerHTML={{
-                    __html: aboutMe.childMarkdownRemark.html,
-                  }}
-                />
-              </Fade>
-            </Box>
-          </Flex>
-        );
-      }}
-    />
+    <ConnectedFooterQuery/>
   </Section.Container>
 );
 
