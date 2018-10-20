@@ -101,6 +101,8 @@ const AboutQuery = ({language}) => (
         render={data => {
             const { aboutMe } = data[language].edges[0].node;
             return (
+                <div>
+                <Section.Header name={language === 'en' ? "About" : "A propos"} />
                 <Flex flexWrap="wrap">
                     <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]}>
                         <Fade>
@@ -112,6 +114,7 @@ const AboutQuery = ({language}) => (
                         </Fade>
                     </Box>
                 </Flex>
+                </div>
             );
         }}
     />
@@ -123,9 +126,14 @@ const ConnectedFooterQuery = connect(
 
 const About = () => (
   <Section.Container id="about">
-    <Section.Header name="About" />
     <ConnectedFooterQuery/>
   </Section.Container>
 );
 
-export default withNavigation({ label: 'About', id: 'about' })(About);
+export default withNavigation({
+    label: {
+        en: 'About',
+        fr: 'A propos'
+    },
+    id: 'about'
+})(About);

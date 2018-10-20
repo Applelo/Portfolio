@@ -54,14 +54,14 @@ const component = ({language, toggleLanguage}) => (
         css={{cursor: 'pointer'}}
     >
         <LinkLanguage borderWidth="4px">
-            {language === 'en' ? "English" : "Français"}
+            {language === 'en' ? "Français" : "English"}
         </LinkLanguage>
     </Label>
 );
 
-const ToogleLanguage = connect(
+const ToggleLanguage = connect(
     mapStateToProps,
     mapDispatchToProps
 )(component);
 
-export default ToogleLanguage;
+export default ToggleLanguage;

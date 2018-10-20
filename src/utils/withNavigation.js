@@ -6,7 +6,7 @@ class AddSectionOnMount extends React.Component {
   static propTypes = {
     addSection: PropTypes.func.isRequired,
     navOptions: PropTypes.shape({
-      label: PropTypes.string,
+      label: PropTypes.object,
       id: PropTypes.string,
     }),
     children: PropTypes.node,

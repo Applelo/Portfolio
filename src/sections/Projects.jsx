@@ -74,7 +74,9 @@ const Project = ({
                      type,
                      publishedDate,
                      logo,
-                 }) => (
+                     language
+                 }) => {
+    return (
     <Card p={0}>
         <Flex css={{height: '200px'}}>
             <TextContainer>
@@ -88,7 +90,7 @@ const Project = ({
                 </Text>
             </TextContainer>
             <ImageContainer>
-                <ProjectImage src={logo.image.src} alt={logo.title}/>
+                <ProjectImage src={logo.img.src} alt={logo.title}/>
                 <ImageSubtitle bg="primaryLight" color="white" top="13px" top-s="-37px">
                     {type}
                 </ImageSubtitle>
@@ -106,7 +108,7 @@ const Project = ({
                         <SocialLink
                             color="primary"
                             hoverColor="primaryLight"
-                            name="Check repository"
+                            name={language === "en" ? "Check repository" : "Voir le dépôt"}
                             fontAwesomeIcon="github"
                             url={repositoryUrl}
                         />
@@ -117,7 +119,7 @@ const Project = ({
                             hoverColor="primaryLight"
                             fontSize={5}
                             mx={1}
-                            name="See project"
+                            name={language === "en" ? "See project" : "Voir le projet"}
                             fontAwesomeIcon="globe"
                             url={projectUrl}
                         />
@@ -126,45 +128,81 @@ const Project = ({
             </ImageContainer>
         </Flex>
     </Card>
-);
+)};
 
 const ProjectsQuery = ({language}) => (
+    <div>
+    <Section.Header name={language === 'en' ? "Projects" : "Projets"} icon="💻" label="notebook"/>
     <StaticQuery
-        query={graphql`
-        query ProjectsQuery {
-          allContentfulAbout(filter: { node_locale: { eq: "en-US" } }) {
-          edges {
-        	node {
-                projects {
-                    id
-                    name
-                    description
-                    projectUrl
-                    repositoryUrl
-                    publishedDate(formatString: "YYYY")
-                    type
-                    logo {
-                        title
-                        image: resize(width: 200, quality: 100) {
-                        src
-                    }
-                }
+        query={graphql`{
+  en: allContentfulAbout(filter: {node_locale: {eq: "en-US"}}) {
+    edges {
+      node {
+        projects {
+          id
+          name
+          description
+          projectUrl
+          repositoryUrl
+          publishedDate(formatString: "YYYY")
+          type
+          logo {
+            title
+            img: resize(width: 200, quality: 100) {
+              src
             }
           }
         }
+      }
+    }
+  }
+  fr: allContentfulAbout(filter: {node_locale: {eq: "fr"}}) {
+    edges {
+      node {
+        projects {
+          id
+          name
+          description
+          projectUrl
+          repositoryUrl
+          publishedDate(formatString: "YYYY")
+          type
+          logo {
+            title
+            img: resize(width: 200, quality: 100) {
+              src
+            }
+          }
         }
-        }
+      }
+    }
+  }
+}
+
       `}
-        render={({allContentfulAbout}) => (
-            <CardContainer minWidth="350px">
-                {allContentfulAbout.edges[0].node.projects.map((p, i) => (
-                    <Fade key={p.id} bottom delay={i * 200}>
-                        <Project {...p} />
-                    </Fade>
-                ))}
-            </CardContainer>
-        )}
+        render={data => {
+            return (
+                <CardContainer minWidth="350px">
+                    {data[language].edges[0].node.projects.map((p, i) => {
+
+                        return (<Fade key={p.id} bottom delay={i * 200}>
+                        <Project
+                            name={p.name}
+                            description={p.description}
+                            projectUrl={p.projectUrl}
+                            repositoryUrl={p.repositoryUrl}
+                            type={p.type}
+                            publishedDate={p.publishedDate}
+                            logo={p.logo}
+                            language={language} />
+                        </Fade>);
+                    } )}
+                </CardContainer>
+            )
+         }
+        }
     />
+    </div>
 );
 
 const mapStateToProps = ({ language }) => {
@@ -177,9 +215,14 @@ const ConnectedProjectsQuery = connect(
 
 const Projects = () => (
     <Section.Container id="projects">
-        <Section.Header name="Projects" icon="💻" label="notebook"/>
         <ConnectedProjectsQuery/>
     </Section.Container>
 );
 
-export default withNavigation({label: 'Projects', id: 'projects'})(Projects);
+export default withNavigation({
+    label: {
+        en: 'Projects',
+        fr: 'Projets'
+    },
+    id: 'projects'
+})(Projects);
