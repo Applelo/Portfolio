@@ -10,7 +10,6 @@ import ImageSubtitle from '../components/ImageSubtitle';
 import withNavigation from '../utils/withNavigation';
 import connect from "react-redux/es/connect/connect";
 
-
 const Title = styled(Subhead)`
   font-size: 14px;
   font-weight: 600;
@@ -36,6 +35,20 @@ const ImageContainer = styled.div`
 
   @media (min-width: 400px) {
     width: 200px;
+  }
+`;
+
+const EmptyProjectImage = styled.div `
+ padding: 10px;
+  margin-top: 50px;
+  height: 100px !important;
+  width: 100px;
+    
+  @media (min-width: 400px) {
+    width: 200px;
+    padding: 40px;
+    height: 200px !important;
+    margin-top: 0px;
   }
 `;
 
@@ -67,6 +80,15 @@ const SocialLinksContainer = styled.div`
   }
 `;
 
+const getProjectImage = (logo) => {
+    if (logo !== null) {
+        return (<ProjectImage src={logo.img.src} alt={logo.title}/>);
+    }
+    else {
+        return (<EmptyProjectImage/>);
+    }
+}
+
 const Project = ({
                      name,
                      description,
@@ -77,7 +99,7 @@ const Project = ({
                      logo,
                      language
                  }) => {
-    return (
+   return (
     <Card p={0}>
         <Flex css={{height: '200px'}}>
             <TextContainer>
@@ -91,7 +113,7 @@ const Project = ({
                 </Text>
             </TextContainer>
             <ImageContainer>
-                <ProjectImage src={logo.img.src} alt={logo.title}/>
+                {getProjectImage(logo)}
                 <ImageSubtitle bg="primaryLight" color="white" top="13px" top-s="-37px">
                     {type}
                 </ImageSubtitle>
