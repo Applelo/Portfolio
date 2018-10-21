@@ -24,9 +24,6 @@ resetCss();
 configureAnchors({ scrollDuration: 600, offset: 0 });
 config({ ssrFadeout: true });
 
-const mapStateToProps = ({ language }) => {
-    return { language }
-};
 
 const Layout = ({ children }) => (
   <Provider theme={theme}>

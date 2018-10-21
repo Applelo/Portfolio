@@ -44,7 +44,8 @@ const ProjectImage = styled(Image)`
   margin-top: 50px;
   height: 100px !important;
   width: 100px;
-
+    border-radius: 50px;
+    
   @media (min-width: 400px) {
     width: 200px;
     padding: 40px;

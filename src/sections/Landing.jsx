@@ -16,6 +16,7 @@ const LandingQuery = ({language}) => (
             edges {
               node {
                 name
+                landingPhrase
             roles
             socialLinks {
               id
@@ -31,6 +32,7 @@ const LandingQuery = ({language}) => (
             edges {
               node {
                 name
+                landingPhrase
             roles
             socialLinks {
               id
@@ -68,7 +70,7 @@ const LandingQuery = ({language}) => (
                     >
                         <TypistLoop interval={1000}>
                             {roles.map(text => (
-                                <Typist key={text} delayStart={500}>
+                                <Typist key={text}>
                                     {text}
                                 </Typist>
                             ))}

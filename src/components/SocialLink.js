@@ -14,18 +14,35 @@ const IconLink = styled(Link)`
   }
 `;
 
-const SocialLink = ({ fontAwesomeIcon, name, url, color, hoverColor }) => (
-  <Tooltip title={name} position="bottom" trigger="mouseenter">
-    <IconLink href={url} target="_blank" color={color} hover={hoverColor}>
-      <FontAwesome name={fontAwesomeIcon} />
-    </IconLink>
-  </Tooltip>
-);
+const IconLinkDisable = styled(Link)`
+  transition: color 0.5s;
+  color: #dddd;
+  pointer-events: none;
+  cursor: default;
+`;
+
+const SocialLink = ({ fontAwesomeIcon, name, url, color, hoverColor }) => {
+
+        if (url) {
+            return (
+                <Tooltip title={name} position="bottom" trigger="mouseenter">
+                    <IconLink href={url} target="_blank" color={color} hover={hoverColor}>
+                        <FontAwesome name={fontAwesomeIcon} />
+                    </IconLink>
+                </Tooltip>
+            )
+        }
+        return (
+            <IconLinkDisable href="#">
+                <FontAwesome name={fontAwesomeIcon} />
+            </IconLinkDisable>
+        )
+};
 
 SocialLink.propTypes = {
   fontAwesomeIcon: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
   color: PropTypes.string.isRequired,
   hoverColor: PropTypes.string.isRequired,
 };
