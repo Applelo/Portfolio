@@ -104,7 +104,7 @@ const AboutQuery = ({language}) => (
                 <div>
                 <Section.Header name={language === 'en' ? "About" : "A propos"} />
                 <Flex flexWrap="wrap">
-                    <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]}>
+                    <Box width={[1, 1, 1]} px={[1, 2, 4]}>
                         <Fade>
                             <AboutText
                                 dangerouslySetInnerHTML={{
