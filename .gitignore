@@ -3,5 +3,5 @@ yarn.lock
 .DS_Store
 .cache
 .idea/
-public/static/*
+public/*
 .env
