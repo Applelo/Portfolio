@@ -141,7 +141,7 @@ class Plume extends React.Component  {
             );
         }
         else {
-            return (<div/>);
+            return (<div className="konami-code"/>);
         }
    }
 };
