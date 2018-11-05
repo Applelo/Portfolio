@@ -26,7 +26,7 @@ const SocialLink = ({ fontAwesomeIcon, name, url, color, hoverColor }) => {
         if (url) {
             return (
                 <Tooltip title={name} position="bottom" trigger="mouseenter">
-                    <IconLink href={url} target="_blank" color={color} hover={hoverColor}>
+                    <IconLink rel="noopener noreferrer" href={url} target="_blank" color={color} hover={hoverColor}>
                         <FontAwesome name={fontAwesomeIcon} />
                     </IconLink>
                 </Tooltip>
