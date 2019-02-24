@@ -1,3 +1,3 @@
 export default {
-    language: "en"
+    language: typeof window !== 'undefined' && window.navigator.language === "fr-FR" ? "fr" : "en"
 }
