@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Image, Flex } from 'rebass';
+import { Box, Flex } from 'rebass';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
@@ -91,8 +91,6 @@ const AboutQuery = ({language}) => (
       `}
         render={data => {
             const { aboutMe } = data[language].edges[0].node;
-            console.log(language);
-            console.log(data[language].edges[0].node);
 
             return (
                 <div>
