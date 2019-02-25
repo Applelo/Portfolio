@@ -56,15 +56,6 @@ const AboutText = styled(Box)`
   }
 `;
 
-const ProfilePicture = styled(Image)`
-  border-radius: 50%;
-  transition: all 0.25s ease-out;
-
-  &:hover {
-    border-radius: 20%;
-  }
-`;
-
 const mapStateToProps = ({ language }) => {
     return { language }
 };
@@ -100,6 +91,7 @@ const AboutQuery = ({language}) => (
       `}
         render={data => {
             const { aboutMe } = data[language].edges[0].node;
+            
             return (
                 <div>
                 <Section.Header name={language === 'en' ? "About" : "A propos"} />
