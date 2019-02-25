@@ -92,7 +92,8 @@ const AboutQuery = ({language}) => (
         render={data => {
             const { aboutMe } = data[language].edges[0].node;
             console.log(language);
-            
+            console.log(data[language].edges[0].node);
+
             return (
                 <div>
                 <Section.Header name={language === 'en' ? "About" : "A propos"} />
