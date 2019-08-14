@@ -48,7 +48,7 @@
     "react-fontawesome": "^1.6.1",
     "react-headroom": "^2.2.4",
     "react-helmet": "^5.2.0",
-    "react-redux": "^5.0.7",
+    "react-redux": "^6.0.1",
     "react-reveal": "^1.2.2",
     "react-scrollable-anchor": "^0.6.1",
     "react-tippy": "^1.2.2",
