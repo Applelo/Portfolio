@@ -39,7 +39,7 @@
     "gatsby-plugin-resolve-src": "^1.1.4",
     "gatsby-plugin-styled-components": "^3.0.0",
     "gatsby-source-contentful": "^2.0.8",
-    "gatsby-source-medium": "^2.0.0",
+    "gatsby-source-medium": "^2.0.6",
     "gatsby-transformer-remark": "^2.1.10",
     "inquirer": "^6.2.0",
     "prop-types": "^15.6.2",
