@@ -56,7 +56,7 @@
     "react-typist-loop": "^0.0.5",
     "rebass": "^2.3.4",
     "redux": "^4.0.4",
-    "styled-components": "^3.4.9",
+    "styled-components": "^4.3.2",
     "toml": "^3.0.0",
     "yargs-parser": "^11.0.0"
   },
