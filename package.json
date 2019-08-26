@@ -54,7 +54,7 @@
     "react-tippy": "^1.2.2",
     "react-typist": "^2.0.4",
     "react-typist-loop": "^0.0.5",
-    "rebass": "^2.3.4",
+    "rebass": "^4.0.5",
     "redux": "^4.0.4",
     "styled-components": "^3.4.9",
     "toml": "^3.0.0",
