@@ -58,7 +58,7 @@
     "redux": "^4.0.4",
     "styled-components": "^3.4.9",
     "toml": "^3.0.0",
-    "yargs-parser": "^11.0.0"
+    "yargs-parser": "^13.1.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
