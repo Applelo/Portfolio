@@ -1,47 +1,71 @@
 {
-  "name": "app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "applelo.github.io",
+  "version": "1.0.0",
+  "description": "Portfolio based on mate-portfolio (Contentful + Gatsby)",
+  "main": "index.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "cleandir ./.cache && gatsby build",
+    "develop": "cleandir ./.cache && gatsby develop",
+    "lint": "eslint ./src"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmaSuriano/gatsby-starter-mate.git"
+  },
+  "keywords": [
+    "gatsby",
+    "starter",
+    "contentful",
+    "PWA",
+    "portfolio"
+  ],
+  "author": "Applelo",
+  "license": "MIT",
   "dependencies": {
-    "core-js": "^3.3.2",
-    "vue": "^2.6.10"
+    "@reach/router": "^1.2.0",
+    "babel-plugin-styled-components": "^1.7.1",
+    "chalk": "^2.4.1",
+    "clean-dir": "^1.0.3",
+    "contentful": "^7.9.1",
+    "dotenv": "^6.0.0",
+    "envfile": "^2.3.0",
+    "gatsby": "^2.13.79",
+    "gatsby-plugin-favicon": "^3.1.4",
+    "gatsby-plugin-google-analytics": "^2.1.7",
+    "gatsby-plugin-google-fonts": "^0.0.4",
+    "gatsby-plugin-manifest": "^2.0.2",
+    "gatsby-plugin-offline": "^2.0.5",
+    "gatsby-plugin-react-helmet": "^3.0.0",
+    "gatsby-plugin-resolve-src": "^1.1.4",
+    "gatsby-plugin-styled-components": "^3.0.0",
+    "gatsby-source-contentful": "^2.0.8",
+    "gatsby-source-medium": "^2.0.6",
+    "gatsby-transformer-remark": "^2.1.10",
+    "inquirer": "^6.2.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.5.2",
+    "react-fontawesome": "^1.6.1",
+    "react-headroom": "^2.2.4",
+    "react-helmet": "^5.2.0",
+    "react-redux": "^5.0.7",
+    "react-reveal": "^1.2.2",
+    "react-scrollable-anchor": "^0.6.1",
+    "react-tippy": "^1.2.2",
+    "react-typist": "^2.0.4",
+    "react-typist-loop": "^0.0.5",
+    "rebass": "^2.3.4",
+    "redux": "^4.0.4",
+    "styled-components": "^3.4.9",
+    "toml": "^3.0.0",
+    "yargs-parser": "^11.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-eslint": "^4.0.0",
-    "@vue/cli-service": "^4.0.0",
-    "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "vue-cli-plugin-pug": "^1.0.7",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1"
+  }
 }
