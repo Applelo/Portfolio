@@ -4,6 +4,7 @@ export default {
     nav: {
       title: "Main navigation",
       items: {
+        about: "About",
         projects: "Projects",
         contact: "Contact",
       },

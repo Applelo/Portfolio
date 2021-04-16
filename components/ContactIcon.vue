@@ -41,9 +41,15 @@ $icon-anim-duration: 60s;
   top: 50%;
   left: calc(50% - 25vw);
   transform: translate3d(-50%, -50%);
-  transform-origin: 30vw;
+  transform-origin: 40vw - 10vw;
   background-color: color-get("white");
   z-index: 1;
+
+  @include bp("grid-big") {
+    width: 100px;
+    height: 100px;
+    transform-origin: calc(25vw + 50px);
+  }
 
   &:before {
     content: "";
@@ -52,6 +58,11 @@ $icon-anim-duration: 60s;
     width: 10vw;
     height: 10vw;
     border-radius: 50%;
+
+    @include bp("grid-big") {
+      width: 100px;
+      height: 100px;
+    }
   }
 
   &:hover:before {

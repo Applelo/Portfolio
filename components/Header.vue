@@ -3,12 +3,12 @@
     HeaderRadiant
     .header__container
       h1.header__title
-        a(:href="'#' + slug($t('about.title'))" v-t="'header.title'")
+        a(:href='getLocalPath' v-t="'header.title'")
       nav
         h2(v-t="'header.nav.title'").is-hidden
         ul.header__nav
-          template(v-for="item in navItems")
-            li.header__nav-item
+          template(v-for="item, index in navItems")
+            li(:class='index === 0 ? "is-hidden" : ""').header__nav-item
               a(v-bind:href="'#' + slug(item)") {{item}}
           li.header__nav-item
             nuxt-link(:to="switchLocalePath(getSwitchLocalCode)") {{getSwitchLocalCode}}
@@ -20,6 +20,15 @@
 import Vue from 'vue';
 import type { LocaleObject } from 'nuxt-i18n';
 import slugify from 'slugify';
+import Gumshoe from 'gumshoejs';
+
+interface GumshoeEvent extends Event {
+  detail: {
+    link: HTMLAnchorElement;
+    content: Element;
+  };
+}
+
 export default Vue.extend({
   data() {
     return {
@@ -43,39 +52,35 @@ export default Vue.extend({
       );
       return local ? local.code : false;
     },
+    getLocalPath():string {
+      return this.switchLocalePath(this.$i18n.locale);
+    }
   },
-   methods: {
+  methods: {
     slug(str: string) {
       return slugify(str, {lower: true});
     },
   },
   mounted() {
-    const header = document.getElementById('header');
-    if (!header) return;
+    new Gumshoe('.header__nav a');
+    document.addEventListener('gumshoeActivate', function (event) {
+      const e = event as GumshoeEvent;
+      const target = e.target as HTMLElement;
+      let hash = '';
 
-    const anchors = header.getElementsByTagName('a');
-    for (let index = 0; index < anchors.length; index++) {
-      const anchor = anchors[index];
-      const href =  anchor.getAttribute('href');
-      if (!href) continue;
+      if (!target.classList.contains('is-hidden')) {
+         // The link
+        const link = e.detail.link;
+        const href =  link.getAttribute('href');
 
-      const link = href.split('#').join('');
-      if (link) {
-        const target = document.getElementById(link);
-        if (target) {
-          anchor.addEventListener('click', (e) => {
-            e.preventDefault();
-
-
-            //Scroll
-            target.scrollIntoView({behavior: "smooth"});
-            const url = new URL(window.location.toString());
-            url.hash = link;
-            window.history.pushState(null, '', url.toString());
-          });
-        }
+        if (!href) return;
+        hash = href.split('#').join('');
       }
-    };
+
+      const url = new URL(window.location.toString());
+      url.hash = hash;
+      window.history.pushState(null, '', url.toString());
+    }, false);
   },
 });
 </script>

@@ -1,5 +1,9 @@
 @import "normalize.css/normalize.css";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: color-get("white");
   background-color: color-get("blue");
