@@ -10,7 +10,7 @@ export default {
   css: ["~/assets/scss/base.scss"],
   styleResources: {
     scss: [
-      "breakpoint-sass/stylesheets/breakpoint.scss",
+      "breakpoint-sass/stylesheets/_breakpoint.scss",
       "./assets/scss/mixins/*.scss",
       "./assets/scss/vars/*.scss",
     ],

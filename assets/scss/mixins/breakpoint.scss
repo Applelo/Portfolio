@@ -1,17 +1,14 @@
 ////
 /// @alias breakpoint (from breakpoint-sass lib)
 ////
-@mixin bp($key...) {
-  @each $key-item in $key {
-    @include breakpoint(map-get($bp, $key-item)) {
-      @content;
-    }
+@mixin bp($key-item) {
+  @include breakpoint(map-get($bp, $key-item)) {
+    @content;
   }
 }
 
 ////
 /// Performs a map-get on a sass map (defaults to the `$bp` map
-/// imported from src/config/css-breakpoints-config.json)
 ///
 /// @param {String} $key - Sass map key
 ////

@@ -1,3 +1,5 @@
+$font-family: Arvo, Arial, Helvetica, sans-serif;
+
 $text-40-font-size: 40px;
 $text-40-lineheight: 50px;
 $text-40-letterspacing: 0;
@@ -14,7 +16,7 @@ $text-30-letterspacing: 0;
 $text-30: ($text-30-font-size, $text-30-lineheight, $text-30-letterspacing);
 
 $text-25-font-size: 25px;
-$text-25-lineheight: 31px;
+$text-25-lineheight: 37px;
 $text-25-letterspacing: 0;
 $text-25: ($text-25-font-size, $text-25-lineheight, $text-25-letterspacing);
 
@@ -23,14 +25,24 @@ $text-20-lineheight: 25px;
 $text-20-letterspacing: 0;
 $text-20: ($text-25-font-size, $text-25-lineheight, $text-25-letterspacing);
 
-%h1,
-h1 {
-  @include typography-setup($text-40..., $margins: false);
+%h1 {
+  @include typography-setup($text-30..., $margins: false);
   margin: 0;
+
+  @include bp("grid-bigger") {
+    @include typography-setup($text-40..., $margins: false);
+  }
 }
 
-%h2,
-h2 {
+%h2 {
   @extend %h1;
   text-transform: lowercase;
+}
+
+%text-nav {
+  @include typography-setup($text-25..., $margins: false);
+
+  @include bp("grid-bigger") {
+    @include typography-setup($text-35..., $margins: false);
+  }
 }
