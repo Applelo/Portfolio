@@ -81,15 +81,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@keyframes anim-nav-text-header {
-  from {
-    text-shadow: 0px 0px 20px color-get("white.2");
-  }
-  to {
-    text-shadow: 0px 0px 20px color-get("white.5");
-  }
-}
-
 .header {
   background-color: color-get("blue");
   position: relative;
@@ -132,11 +123,7 @@ export default Vue.extend({
   a {
     color: color-get("white");
     text-decoration: none;
-    text-shadow: 10px -5px 10px color-get("black");
-
-    &:hover {
-      animation: anim-nav-text-header 1s linear infinite alternate;
-    }
+    @extend %text-shadow;
   }
 }
 </style>

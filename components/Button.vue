@@ -11,15 +11,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@keyframes anim-button {
-  from {
-    box-shadow: 0px 0px 20px color-get("white.2");
-  }
-  to {
-    box-shadow: 0px 0px 20px color-get("white.5");
-  }
-}
-
 .button {
   -webkit-appearance: none;
   border: 0;
@@ -31,7 +22,7 @@ export default Vue.extend({
   border-radius: 25px;
   text-transform: lowercase;
   cursor: pointer;
-  box-shadow: 10px -5px 10px color-get("black");
+  @extend %box-shadow;
 
   @include bp("grid-bigger") {
     height: $text-40-lineheight;

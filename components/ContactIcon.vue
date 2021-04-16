@@ -1,5 +1,5 @@
 <template lang="pug">
-  a(:class="`icon--${type}`").icon
+  a(:class="`contact-icon--${type}`").contact-icon
     span
 </template>
 
@@ -29,18 +29,9 @@ export default Vue.extend({
   }
 }
 
-@keyframes anim-icon-hover {
-  from {
-    box-shadow: 0px 0px 20px color-get("white.2");
-  }
-  to {
-    box-shadow: 0px 0px 20px color-get("white.5");
-  }
-}
-
 $icon-anim-duration: 60s;
 
-.icon {
+.contact-icon {
   display: block;
   width: 10vw;
   height: 10vw;
@@ -48,12 +39,11 @@ $icon-anim-duration: 60s;
   position: absolute;
   animation: anim-icon-rotate $icon-anim-duration linear infinite;
   top: 50%;
-  left: calc(50% - 30vw);
+  left: calc(50% - 25vw);
   transform: translate3d(-50%, -50%);
-  transform-origin: 35vw;
+  transform-origin: 30vw;
   background-color: color-get("white");
   z-index: 1;
-  mix-blend-mode: difference;
 
   &:before {
     content: "";
@@ -65,7 +55,7 @@ $icon-anim-duration: 60s;
   }
 
   &:hover:before {
-    animation: anim-icon-hover 1s linear infinite alternate;
+    animation: anim-box-shadow-hover 1s linear infinite alternate;
   }
 
   span {

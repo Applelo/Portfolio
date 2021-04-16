@@ -1,0 +1,102 @@
+<template lang="pug">
+  .contact
+    ContactIcon(
+      type='twitter'
+      href='https://twitter.com/Applel0'
+      target='_blank'
+      @mouseover.native="changeLabelOnHover('twitter')"
+      @mouseleave.native="changeLabelOnHover(false)"
+    )
+    ContactIcon(
+      type='github'
+      href='https://github.com/Applelo'
+      target='_blank'
+      @mouseover.native="changeLabelOnHover('github')"
+       @mouseleave.native="changeLabelOnHover(false)"
+    )
+    ContactIcon(
+      type='email'
+      href='mailto:boubaultlois@gmail.com'
+      target='_blank'
+      @mouseover.native="changeLabelOnHover('email')"
+      @mouseleave.native="changeLabelOnHover(false)"
+    )
+    ContactIcon(
+      type='linkedin'
+      href='https://www.linkedin.com/in/loisboubault/'
+      target='_blank'
+      @mouseover.native="changeLabelOnHover('linkedin')"
+      @mouseleave.native="changeLabelOnHover(false)"
+    )
+    p.contact__label(ref='label')
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  methods: {
+    changeLabelOnHover(type: string | false) {
+      const label = this.$refs.label as HTMLElement;
+      if (type) {
+        label.textContent = this.$t(`contact.socials.${type}`).toString();
+        label.classList.add("is-active");
+      } else {
+        label.textContent = "";
+        label.classList.remove("is-active");
+      }
+    },
+  },
+});
+</script>
+
+<style lang="scss">
+.contact {
+  background: radial-gradient(
+    closest-side,
+    color-get("grey"),
+    color-get("blue")
+  );
+  width: 100%;
+  height: 100%;
+  background-size: 40vw 40vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+
+  &::before {
+    content: "";
+    background-color: transparent;
+    z-index: 1;
+    border: 2px solid color-get("white");
+    width: 50vw;
+    height: 50vw;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @include e("label") {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @include typography-setup($text-20..., $margins: false);
+    margin: 0;
+    opacity: 0;
+    transition: opacity 200ms linear;
+
+    @include bp("0-to-3") {
+      opacity: 0;
+    }
+
+    @include bp("grid-big") {
+      &.is-active {
+        opacity: 1;
+        animation: anim-text-shadow-hover 1s linear infinite alternate;
+      }
+    }
+  }
+}
+</style>

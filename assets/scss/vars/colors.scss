@@ -6,3 +6,37 @@ $colors: (
   "blue": rgb(6, 8, 29),
   "grey": rgb(41, 40, 40),
 );
+
+@keyframes anim-box-shadow-hover {
+  from {
+    box-shadow: 0px 0px 20px color-get("white.2");
+  }
+  to {
+    box-shadow: 0px 0px 20px color-get("white.5");
+  }
+}
+
+%box-shadow {
+  box-shadow: 10px -5px 10px color-get("black");
+
+  &:hover {
+    animation: anim-box-shadow-hover 1s linear infinite alternate;
+  }
+}
+
+@keyframes anim-text-shadow-hover {
+  from {
+    text-shadow: 0px 0px 20px color-get("white.2");
+  }
+  to {
+    text-shadow: 0px 0px 20px color-get("white.5");
+  }
+}
+
+%text-shadow {
+  text-shadow: 10px -5px 10px color-get("black");
+
+  &:hover {
+    animation: anim-text-shadow-hover 1s linear infinite alternate;
+  }
+}

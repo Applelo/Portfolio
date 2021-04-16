@@ -18,5 +18,11 @@ export default {
   },
   contact: {
     title: "Contact",
+    socials: {
+      linkedin: "LinkedIn",
+      twitter: "Twitter",
+      email: "Contactez moi",
+      github: "GitHub",
+    },
   },
 };

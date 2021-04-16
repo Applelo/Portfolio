@@ -6,6 +6,7 @@ export default {
     "@nuxtjs/google-fonts",
     // "nuxt-purgecss",
     "@nuxtjs/style-resources",
+    "@nuxtjs/svg",
   ],
   css: ["~/assets/scss/base.scss"],
   styleResources: {
