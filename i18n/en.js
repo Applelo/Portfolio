@@ -10,4 +10,13 @@ export default {
       cv: "Cv",
     },
   },
+  about: {
+    title: "About",
+  },
+  projects: {
+    title: "Projects",
+  },
+  contact: {
+    title: "Contact",
+  },
 };

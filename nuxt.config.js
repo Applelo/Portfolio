@@ -4,7 +4,7 @@ export default {
   buildModules: [
     "@nuxt/typescript-build",
     "@nuxtjs/google-fonts",
-    "nuxt-purgecss",
+    // "nuxt-purgecss",
     "@nuxtjs/style-resources",
   ],
   css: ["~/assets/scss/base.scss"],

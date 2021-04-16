@@ -1,22 +1,25 @@
 <template lang="pug">
   header.header#header
-    h1.header__title
-      a(href="#me" v-t="'header.title'")
-    nav
-      h2(v-t="'header.nav.title'").is-hidden
-      ul.header__nav
-        template(v-for="item in navItems")
+    HeaderRadiant
+    .header__container
+      h1.header__title
+        a(:href="'#' + slug($t('about.title'))" v-t="'header.title'")
+      nav
+        h2(v-t="'header.nav.title'").is-hidden
+        ul.header__nav
+          template(v-for="item in navItems")
+            li.header__nav-item
+              a(v-bind:href="'#' + slug(item)") {{item}}
           li.header__nav-item
-            a(v-bind:href="'#' + item.toLowerCase()") {{item}}
-        li.header__nav-item
-          nuxt-link(:to="switchLocalePath(getSwitchLocalCode)") {{getSwitchLocalCode}}
-        li.header__nav-item
-          Button(id="cv" :title="$t('header.nav.cv')")
+            nuxt-link(:to="switchLocalePath(getSwitchLocalCode)") {{getSwitchLocalCode}}
+          li.header__nav-item
+            Button(id="cv" :title="$t('header.nav.cv')")
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import type { LocaleObject } from 'nuxt-i18n';
+import slugify from 'slugify';
 export default Vue.extend({
   data() {
     return {
@@ -42,82 +45,42 @@ export default Vue.extend({
     },
   },
    methods: {
-    refresh () {
-      const header = document.getElementById('header');
-      if (!header) return;
-
-      const scrollY = window.pageYOffset;
-      const direction = scrollY < this.previousScrollY ? 'top' : 'bottom';
-      const headerHeight = header.clientHeight;
-
-      if (
-        (direction === 'bottom' && header.classList.contains('is-sticky')) ||
-        scrollY <= headerHeight
-      ) {
-        header.classList.remove('header--top');
-        const percentage = ((scrollY - this.previousDirectionScrollY) / headerHeight) * 100;
-        if (scrollY <= 0) {
-          //fix for ios
-          this.previousDirectionScrollY = 0;
-          header.style.transform = '';
-        } else {
-          header.style.transform = `translateY(-${percentage > 100 ? 100 : percentage.toFixed(2)}%)`;
-        }
-      } else if (direction === 'top') {
-        header.classList.add('header--top');
-        header.style.transform = '';
-        this.previousDirectionScrollY = scrollY;
-      } else {
-        header.classList.remove('header--top');
-        this.previousDirectionScrollY = scrollY;
-      }
-
-      this.previousScrollY = scrollY;
-    }
+    slug(str: string) {
+      return slugify(str, {lower: true});
+    },
   },
-  beforeMount () {
+  mounted() {
     const header = document.getElementById('header');
     if (!header) return;
-    const observer = new IntersectionObserver(
-      ([e]) => e.target.classList.toggle('is-sticky', e.intersectionRatio < 1),
-      { threshold: [1], rootMargin: '-1px 0px 0px 0px' }
-    );
-    observer.observe(header);
 
-    window.addEventListener('scroll', this.refresh);
-    window.addEventListener('resize', this.refresh);
+    const anchors = header.getElementsByTagName('a');
+    for (let index = 0; index < anchors.length; index++) {
+      const anchor = anchors[index];
+      const href =  anchor.getAttribute('href');
+      if (!href) continue;
+
+      const link = href.split('#').join('');
+      if (link) {
+        const target = document.getElementById(link);
+        if (target) {
+          anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+
+
+            //Scroll
+            target.scrollIntoView({behavior: "smooth"});
+            const url = new URL(window.location.toString());
+            url.hash = link;
+            window.history.pushState(null, '', url.toString());
+          });
+        }
+      }
+    };
   },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.refresh);
-    window.removeEventListener('resize', this.refresh);
-    this.observer?.disconnect();
-  }
 });
 </script>
 
 <style lang="scss">
-@keyframes anim-radial-header {
-  from {
-    background-position-x: 90% - 90% / 4;
-    background-size: 90%;
-  }
-  to {
-    background-position-x: 80% - 80% / 4;
-    background-size: 80%;
-  }
-}
-
-@keyframes anim-radial-header-big {
-  from {
-    background-position-x: 80% - 80% / 4;
-    background-size: 80%;
-  }
-  to {
-    background-position-x: 70% - 70% / 4;
-    background-size: 70%;
-  }
-}
-
 @keyframes anim-nav-text-header {
   from {
     text-shadow: 0px 0px 20px color-get("white.2");
@@ -128,41 +91,19 @@ export default Vue.extend({
 }
 
 .header {
-  display: flex;
-  position: sticky;
-  top: 0;
-  padding: $padding;
-  margin-bottom: 120px;
-  justify-content: space-between;
+  background-color: color-get("blue");
+  position: relative;
+  z-index: 2;
+  width: 100%;
 
-  @include m("top") {
-    transition: transform 200ms linear;
+  @include bp("grid-bigger") {
+    margin-bottom: 120px;
   }
 
-  &::before {
-    content: "";
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 50vh;
-    transform: translate(-$padding, -75%);
-    z-index: -1;
-    animation: anim-radial-header 10s ease-in-out infinite alternate;
-    background: radial-gradient(
-      closest-side,
-      color-get("grey"),
-      color-get("blue")
-    );
-    background-position-x: 90% - 90% / 4;
-    background-size: 90%;
-    background-repeat: no-repeat;
-
-    @include bp("grid-big") {
-      transform: translate(-$padding, -60%);
-      animation-name: anim-radial-header-big;
-      background-position-x: 80% - 80% / 4;
-      background-size: 80%;
-    }
+  @include e("container") {
+    display: flex;
+    justify-content: space-between;
+    padding: $padding;
   }
 
   @include e("title") {
