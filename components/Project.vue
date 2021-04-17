@@ -54,7 +54,6 @@ export default Vue.extend({
   border-radius: 20px;
   background-color: color-get('white.2');
   color: color-get('white');
-  backdrop-filter: blur(100px);
   box-shadow: $shadow-light;
 
   @include e('container') {
@@ -130,12 +129,13 @@ export default Vue.extend({
     background-position: center;
     background-size: contain;
     background-image: url('~/assets/icons/link.svg');
-    transition: 200ms transform linear;
+    transition: 100ms opacity linear;
     border-radius: 50%;
     opacity: 0.7;
 
     &:hover {
       animation: anim-box-shadow-hover $shadow-hover-anim;
+      opacity: 1;
     }
 
     @include m('www') {
