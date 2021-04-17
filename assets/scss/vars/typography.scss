@@ -23,7 +23,12 @@ $text-25: ($text-25-font-size, $text-25-lineheight, $text-25-letterspacing);
 $text-20-font-size: 20px;
 $text-20-lineheight: 25px;
 $text-20-letterspacing: 0;
-$text-20: ($text-25-font-size, $text-25-lineheight, $text-25-letterspacing);
+$text-20: ($text-20-font-size, $text-20-lineheight, $text-20-letterspacing);
+
+$text-15-font-size: 15px;
+$text-15-lineheight: 18px;
+$text-15-letterspacing: 0;
+$text-15: ($text-15-font-size, $text-15-lineheight, $text-15-letterspacing);
 
 %h1 {
   @include typography-setup($text-30..., $margins: false);
@@ -45,5 +50,15 @@ $text-20: ($text-25-font-size, $text-25-lineheight, $text-25-letterspacing);
 
   @include bp('grid-bigger') {
     @include typography-setup($text-35..., $margins: false);
+  }
+}
+
+%text-small-italic {
+  font-style: italic;
+  @include typography-setup($text-15..., $margins: false);
+  margin: 0;
+
+  @include bp('grid-bigger') {
+    @include typography-setup($text-25..., $margins: false);
   }
 }

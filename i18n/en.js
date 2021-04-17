@@ -16,6 +16,10 @@ export default {
   },
   projects: {
     title: 'Projects',
+    origins: {
+      principal: 'Developed at [Principal](https://principal.studio)',
+      hobby: 'Developed on my free time',
+    },
   },
   contact: {
     title: 'Contact',

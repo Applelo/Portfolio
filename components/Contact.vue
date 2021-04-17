@@ -35,14 +35,23 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
+  data() {
+    return {
+      labelHoverTimeout: 0,
+    };
+  },
   methods: {
     changeLabelOnHover(type: string | false) {
       const label = this.$refs.label as HTMLElement;
+      clearTimeout(this.labelHoverTimeout);
       if (type) {
         label.textContent = this.$t(`contact.socials.${type}`).toString();
         label.classList.add('is-active');
       } else {
-        label.textContent = '';
+        this.labelHoverTimeout = window.setTimeout(() => {
+          label.textContent = '';
+        }, 200);
+
         label.classList.remove('is-active');
       }
     },
@@ -111,7 +120,7 @@ export default Vue.extend({
     @include bp('grid-big') {
       &.is-active {
         opacity: 1;
-        animation: anim-text-shadow-hover 1s linear infinite alternate;
+        animation: anim-text-shadow-hover $shadow-hover-anim;
       }
     }
   }

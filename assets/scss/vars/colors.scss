@@ -41,7 +41,8 @@ $shadow-hover-to: 0px 0px 20px color-get('white.5');
 %text-shadow {
   text-shadow: $shadow;
 
-  &:hover {
+  &:hover,
+  &.is-active {
     animation: anim-text-shadow-hover $shadow-hover-anim;
   }
 }

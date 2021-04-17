@@ -55,12 +55,19 @@ export default Vue.extend({
     this.observer?.disconnect();
   },
   mounted() {
+    //TODO: fix anchor
     this.observer = new IntersectionObserver((entries) => {
       for (let index = 0; index < entries.length; index++) {
         const entry = entries[index];
+        const target = entry.target as HTMLElement;
+
+        // update active
+        const hrefTitle = target.querySelector('.section__title a');
+        if (hrefTitle) hrefTitle.classList[entry.isIntersecting ? 'add' : 'remove']('is-active');
+
+        // update anchor
         if (!entry.isIntersecting) continue;
 
-        const target = entry.target as HTMLElement;
         let hash = '';
 
         if (!target.classList.contains('section--about')) {
@@ -74,9 +81,8 @@ export default Vue.extend({
         const url = new URL(window.location.toString());
         url.hash = hash;
         window.history.pushState(null, '', url.toString());
+
       }
-    }, {
-      threshold: .95
     });
 
     const items = document.getElementsByClassName('section');
