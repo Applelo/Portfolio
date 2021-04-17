@@ -2,12 +2,14 @@ $colors: (
   'white': rgb(255, 255, 255),
   'white.2': rgba(255, 255, 255, 0.2),
   'white.5': rgba(255, 255, 255, 0.5),
+  'white.7': rgba(255, 255, 255, 0.7),
   'black': rgb(0, 0, 0),
   'blue': rgb(6, 8, 29),
   'grey': rgb(41, 40, 40),
 );
 
 $shadow: 10px -5px 10px color-get('black');
+$shadow-light: 5px -2.5px 10px color-get('grey');
 $shadow-hover-anim: 1s linear infinite alternate;
 $shadow-hover-from: 0px 0px 20px color-get('white.2');
 $shadow-hover-to: 0px 0px 20px color-get('white.5');

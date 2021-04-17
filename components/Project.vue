@@ -52,9 +52,10 @@ export default Vue.extend({
   height: 0;
   padding-bottom: 100%;
   border-radius: 20px;
-  background-color: color-get('white');
-  color: color-get('black');
-  @extend %box-shadow;
+  background-color: color-get('white.2');
+  color: color-get('white');
+  backdrop-filter: blur(100px);
+  box-shadow: $shadow-light;
 
   @include e('container') {
     display: flex;
@@ -72,6 +73,7 @@ export default Vue.extend({
     align-items: center;
     justify-content: space-between;
     margin: 0 0 35px;
+    color: color-get('white.7');
   }
 
   @include e('year') {
@@ -102,6 +104,7 @@ export default Vue.extend({
     align-items: center;
     justify-content: space-between;
     margin-top: auto;
+    color: color-get('white.7');
   }
 
   @include e('origin') {
@@ -109,11 +112,12 @@ export default Vue.extend({
     margin: 0 $padding 0 0;
 
     a {
-      color: color-get('black');
+      color: color-get('white.5');
       text-decoration: underline;
 
       &:hover {
-        text-decoration: none;
+        color: color-get('white');
+        @extend %text-shadow;
       }
     }
   }
@@ -127,19 +131,20 @@ export default Vue.extend({
     background-size: contain;
     background-image: url('~/assets/icons/link.svg');
     transition: 200ms transform linear;
+    border-radius: 50%;
+    opacity: 0.7;
 
     &:hover {
-      transform: scale(1.1);
+      animation: anim-box-shadow-hover $shadow-hover-anim;
     }
 
     @include m('www') {
-      background-size: 30px 30px;
-      border: 2px solid color-get('blue');
-      border-radius: 50%;
+      background-size: 35px 35px;
+      border: 2px solid color-get('white');
     }
 
     @include m('github') {
-      background-image: url('~/assets/icons/github.svg');
+      background-image: url('~/assets/icons/github-white.svg');
     }
 
     @include m('wordpress') {

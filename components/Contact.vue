@@ -95,11 +95,15 @@ export default Vue.extend({
       );
       width: 100%;
       height: 100%;
-      background-size: 40vw 40vw;
+      background-size: 50vw 50vw;
       background-position: center;
       background-repeat: no-repeat;
       position: absolute;
       z-index: -1;
+
+      @include bp('grid-width') {
+        background-size: #{bp-get('grid-width') / 2} #{bp-get('grid-width') / 2};
+      }
     }
   }
 

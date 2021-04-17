@@ -50,6 +50,14 @@ export default Vue.extend({
     }
   }
 
+  @include m('projects') {
+    background: radial-gradient(
+      closest-side,
+      color-get('grey'),
+      color-get('blue')
+    );
+  }
+
   @include m('contact') {
     display: flex;
     flex-direction: column;
