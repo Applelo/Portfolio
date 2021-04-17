@@ -3,14 +3,14 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
   methods: {
     updateRadiant(e: MouseEvent) {
       const posX = e.clientX;
       const posY = e.clientY;
-      const radiant = document.getElementById("radiant");
-      const header = document.getElementById("header");
+      const radiant = document.getElementById('radiant');
+      const header = document.getElementById('header');
       const headerHeight = header?.clientHeight;
 
       if (!radiant) return;
@@ -18,15 +18,15 @@ export default Vue.extend({
       if (headerHeight && posY <= headerHeight) {
         radiant.style.backgroundPositionX = `calc(${posX}px - 50vw)`;
       } else {
-        radiant.style.backgroundPositionX = "";
+        radiant.style.backgroundPositionX = '';
       }
     },
   },
   mounted() {
-    window.addEventListener("mousemove", this.updateRadiant);
+    window.addEventListener('mousemove', this.updateRadiant);
   },
   beforeDestroy() {
-    window.removeEventListener("mousemove", this.updateRadiant);
+    window.removeEventListener('mousemove', this.updateRadiant);
   },
 });
 </script>
@@ -54,8 +54,8 @@ export default Vue.extend({
   background-size: 100%;
   background: radial-gradient(
     closest-side,
-    color-get("grey"),
-    color-get("blue")
+    color-get('grey'),
+    color-get('blue')
   );
   background-repeat: no-repeat;
   transform: translateY(-50%);

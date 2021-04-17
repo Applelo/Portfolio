@@ -94,25 +94,25 @@ export default Vue.extend({
   z-index: 2;
   width: 100%;
 
-  @include bp("grid-bigger") {
+  @include bp('grid-bigger') {
     margin-bottom: 120px;
   }
 
-  @include e("container") {
+  @include e('container') {
     display: flex;
     justify-content: space-between;
     padding: $padding;
   }
 
-  @include e("title") {
+  @include e('title') {
     a {
-      color: color-get("white");
+      color: color-get('white');
       text-decoration: none;
-      text-shadow: 10px -5px 10px color-get("black");
+      text-shadow: 10px -5px 10px color-get('black');
     }
   }
 
-  @include e("nav") {
+  @include e('nav') {
     text-transform: lowercase;
     list-style: none;
     display: flex;
@@ -121,22 +121,22 @@ export default Vue.extend({
     @extend %text-nav;
   }
 
-  @include e("nav-item") {
+  @include e('nav-item') {
     &:not(:last-child) {
       margin-right: 35px;
     }
 
-    @include m("anchor") {
+    @include m('anchor') {
       display: none;
 
-      @include bp("grid-big") {
+      @include bp('grid-big') {
         display: block;
       }
     }
   }
 
   a {
-    color: color-get("white");
+    color: color-get('white');
     text-decoration: none;
     @extend %text-shadow;
   }

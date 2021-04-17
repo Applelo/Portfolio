@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
   props: { type: String },
 });
@@ -42,29 +42,29 @@ $icon-anim-duration: 120s;
   left: calc(50% - 25vw);
   transform: translate3d(-50%, -50%);
   transform-origin: 40vw - 10vw;
-  background-color: color-get("white");
+  background-color: color-get('white');
   z-index: 1;
 
-  @include bp("grid-big") {
+  @include bp('grid-big') {
     width: 100px;
     height: 100px;
     transform-origin: calc(25vw + 50px);
   }
 
-  @include bp("grid-width") {
-    left: calc(50% - #{bp-get("grid-width") / 4});
-    transform-origin: calc(#{bp-get("grid-width") / 4} + 50px);
+  @include bp('grid-width') {
+    left: calc(50% - #{bp-get('grid-width') / 4});
+    transform-origin: calc(#{bp-get('grid-width') / 4} + 50px);
   }
 
   &:before {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     width: 10vw;
     height: 10vw;
     border-radius: 50%;
 
-    @include bp("grid-big") {
+    @include bp('grid-big') {
       width: 100px;
       height: 100px;
     }
@@ -85,32 +85,32 @@ $icon-anim-duration: 120s;
       reverse;
   }
 
-  @include m("github") {
+  @include m('github') {
     span {
-      background-image: url("~/assets/icons/github.svg");
+      background-image: url('~/assets/icons/github.svg');
     }
   }
 
-  @include m("email") {
+  @include m('email') {
     animation-delay: -$icon-anim-duration/4;
     span {
-      background-image: url("~/assets/icons/envelope.svg");
+      background-image: url('~/assets/icons/envelope.svg');
       animation-delay: -$icon-anim-duration/4;
     }
   }
 
-  @include m("linkedin") {
+  @include m('linkedin') {
     animation-delay: -$icon-anim-duration/4 * 2;
     span {
-      background-image: url("~/assets/icons/linkedin.svg");
+      background-image: url('~/assets/icons/linkedin.svg');
       animation-delay: -$icon-anim-duration/4 * 2;
     }
   }
 
-  @include m("twitter") {
+  @include m('twitter') {
     animation-delay: -$icon-anim-duration/4 * 3;
     span {
-      background-image: url("~/assets/icons/twitter.svg");
+      background-image: url('~/assets/icons/twitter.svg');
       animation-delay: -$icon-anim-duration/4 * 3;
     }
   }

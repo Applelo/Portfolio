@@ -30,7 +30,7 @@ $text-20: ($text-25-font-size, $text-25-lineheight, $text-25-letterspacing);
   font-weight: 700;
   margin: 0;
 
-  @include bp("grid-bigger") {
+  @include bp('grid-bigger') {
     @include typography-setup($text-40..., $margins: false);
   }
 }
@@ -43,7 +43,7 @@ $text-20: ($text-25-font-size, $text-25-lineheight, $text-25-letterspacing);
 %text-nav {
   @include typography-setup($text-25..., $margins: false);
 
-  @include bp("grid-bigger") {
+  @include bp('grid-bigger') {
     @include typography-setup($text-35..., $margins: false);
   }
 }

@@ -33,17 +33,17 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
   methods: {
     changeLabelOnHover(type: string | false) {
       const label = this.$refs.label as HTMLElement;
       if (type) {
         label.textContent = this.$t(`contact.socials.${type}`).toString();
-        label.classList.add("is-active");
+        label.classList.add('is-active');
       } else {
-        label.textContent = "";
-        label.classList.remove("is-active");
+        label.textContent = '';
+        label.classList.remove('is-active');
       }
     },
   },
@@ -59,30 +59,30 @@ export default Vue.extend({
   height: 100%;
   flex-grow: 1;
 
-  @include e("container") {
+  @include e('container') {
     position: relative;
     background-color: transparent;
-    border: 2px solid color-get("white");
+    border: 2px solid color-get('white');
     width: 50vw;
     height: 50vw;
     border-radius: 50%;
     margin: 5vw;
 
-    @include bp("grid-big") {
+    @include bp('grid-big') {
       margin: 100px;
     }
 
-    @include bp("grid-width") {
-      width: bp-get("grid-width") / 2;
-      height: bp-get("grid-width") / 2;
+    @include bp('grid-width') {
+      width: bp-get('grid-width') / 2;
+      height: bp-get('grid-width') / 2;
     }
 
     &::before {
-      content: "";
+      content: '';
       background: radial-gradient(
         closest-side,
-        color-get("grey"),
-        color-get("blue")
+        color-get('grey'),
+        color-get('blue')
       );
       width: 100%;
       height: 100%;
@@ -94,7 +94,7 @@ export default Vue.extend({
     }
   }
 
-  @include e("label") {
+  @include e('label') {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -104,11 +104,11 @@ export default Vue.extend({
     opacity: 0;
     transition: opacity 200ms linear;
 
-    @include bp("0-to-3") {
+    @include bp('0-to-3') {
       opacity: 0;
     }
 
-    @include bp("grid-big") {
+    @include bp('grid-big') {
       &.is-active {
         opacity: 1;
         animation: anim-text-shadow-hover 1s linear infinite alternate;

@@ -1,29 +1,29 @@
 export default {
   header: {
-    title: "Loïs Boubault",
+    title: 'Loïs Boubault',
     nav: {
-      title: "Navigation principale",
+      title: 'Navigation principale',
       items: {
         // about: "A propos",
-        projects: "Projets",
-        contact: "Contact",
+        projects: 'Projets',
+        contact: 'Contact',
       },
-      cv: "Cv",
+      cv: 'Cv',
     },
   },
   about: {
-    title: "A propos",
+    title: 'A propos',
   },
   projects: {
-    title: "Projets",
+    title: 'Projets',
   },
   contact: {
-    title: "Contact",
+    title: 'Contact',
     socials: {
-      linkedin: "LinkedIn",
-      twitter: "Twitter",
-      email: "Contactez moi",
-      github: "GitHub",
+      linkedin: 'LinkedIn',
+      twitter: 'Twitter',
+      email: 'Contactez moi',
+      github: 'GitHub',
     },
   },
 };

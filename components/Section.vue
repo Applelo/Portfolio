@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import slugify from "slugify";
+import Vue from 'vue';
+import slugify from 'slugify';
 
 export default Vue.extend({
   props: { title: String, type: String },
@@ -21,10 +21,10 @@ export default Vue.extend({
     },
     goToTop() {
       const rocket = this.$refs.rocket as HTMLElement;
-      rocket.style.transform = "translateY(-200%) rotate(-45deg)";
+      rocket.style.transform = 'translateY(-200%) rotate(-45deg)';
       setTimeout(() => {
-        window.scrollTo({ behavior: "smooth", top: 0, left: 0 });
-        rocket.style.transform = "";
+        window.scrollTo({ behavior: 'smooth', top: 0, left: 0 });
+        rocket.style.transform = '';
       }, 75);
     },
   },
@@ -39,37 +39,37 @@ export default Vue.extend({
   overflow: hidden;
 
   &:not(:last-child) {
-    border-bottom: 1px solid color-get("white.2");
+    border-bottom: 1px solid color-get('white.2');
   }
 
-  @include m("about") {
+  @include m('about') {
     min-height: calc(100vh - 77px);
 
-    @include bp("grid-bigger") {
+    @include bp('grid-bigger') {
       min-height: calc(100vh - 90px);
     }
   }
 
-  @include m("contact") {
+  @include m('contact') {
     display: flex;
     flex-direction: column;
   }
 
-  @include e("header") {
+  @include e('header') {
     display: flex;
     justify-content: space-between;
     padding-top: $padding;
   }
 
-  @include e("title") {
+  @include e('title') {
     a {
-      color: color-get("white");
+      color: color-get('white');
       text-decoration: none;
       @extend %text-shadow;
     }
   }
 
-  @include e("rocket") {
+  @include e('rocket') {
     width: $text-30-lineheight + $padding * 2;
     height: $text-30-lineheight;
     -webkit-appearance: none;
@@ -82,7 +82,7 @@ export default Vue.extend({
     background-size: $text-30-lineheight;
     position: relative;
 
-    @include bp("grid-bigger") {
+    @include bp('grid-bigger') {
       width: $text-40-lineheight + $padding * 2;
       height: $text-40-lineheight;
     }
@@ -96,7 +96,7 @@ export default Vue.extend({
     }
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
@@ -105,10 +105,10 @@ export default Vue.extend({
       background-position: center;
       background-size: $text-30-lineheight;
       background-repeat: no-repeat;
-      background-image: url("~/assets/icons/rocket.svg");
+      background-image: url('~/assets/icons/rocket.svg');
       filter: drop-shadow(10px -5px 10px black);
 
-      @include bp("grid-bigger") {
+      @include bp('grid-bigger') {
         background-size: $text-40-lineheight;
       }
     }

@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
   props: { title: String },
 });
@@ -15,8 +15,8 @@ export default Vue.extend({
   -webkit-appearance: none;
   border: 0;
   background-color: transparent;
-  color: color-get("blue");
-  background-color: color-get("white");
+  color: color-get('blue');
+  background-color: color-get('white');
   height: $text-30-lineheight;
   padding: 0 $padding / 2;
   border-radius: 25px;
@@ -24,7 +24,7 @@ export default Vue.extend({
   cursor: pointer;
   @extend %box-shadow;
 
-  @include bp("grid-bigger") {
+  @include bp('grid-bigger') {
     height: $text-40-lineheight;
     padding: 0 $padding;
   }
