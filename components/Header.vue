@@ -7,7 +7,7 @@
         h2(v-t="'header.nav.title'").is-hidden
         ul.header__nav
           template(v-for="item in navItems")
-            li.header__nav-item
+            li.header__nav-item.header__nav-item--anchor
               a(v-bind:href="'#' + slug(item)") {{item}}
           li.header__nav-item
             nuxt-link(:to="switchLocalePath(getSwitchLocalCode)") {{getSwitchLocalCode}}
@@ -124,6 +124,14 @@ export default Vue.extend({
   @include e("nav-item") {
     &:not(:last-child) {
       margin-right: 35px;
+    }
+
+    @include m("anchor") {
+      display: none;
+
+      @include bp("grid-big") {
+        display: block;
+      }
     }
   }
 
