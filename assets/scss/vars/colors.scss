@@ -7,36 +7,50 @@ $colors: (
   "grey": rgb(41, 40, 40),
 );
 
+$shadow: 10px -5px 10px color-get("black");
+$shadow-hover-anim: 1s linear infinite alternate;
+$shadow-hover-from: 0px 0px 20px color-get("white.2");
+$shadow-hover-to: 0px 0px 20px color-get("white.5");
+
 @keyframes anim-box-shadow-hover {
   from {
-    box-shadow: 0px 0px 20px color-get("white.2");
+    box-shadow: $shadow-hover-from;
   }
   to {
-    box-shadow: 0px 0px 20px color-get("white.5");
+    box-shadow: $shadow-hover-to;
   }
 }
 
 %box-shadow {
-  box-shadow: 10px -5px 10px color-get("black");
+  box-shadow: $shadow;
 
   &:hover {
-    animation: anim-box-shadow-hover 1s linear infinite alternate;
+    animation: anim-box-shadow-hover $shadow-hover-anim;
   }
 }
 
 @keyframes anim-text-shadow-hover {
   from {
-    text-shadow: 0px 0px 20px color-get("white.2");
+    text-shadow: $shadow-hover-from;
   }
   to {
-    text-shadow: 0px 0px 20px color-get("white.5");
+    text-shadow: $shadow-hover-to;
   }
 }
 
 %text-shadow {
-  text-shadow: 10px -5px 10px color-get("black");
+  text-shadow: $shadow;
 
   &:hover {
-    animation: anim-text-shadow-hover 1s linear infinite alternate;
+    animation: anim-text-shadow-hover $shadow-hover-anim;
+  }
+}
+
+@keyframes anim-drop-shadow-hover {
+  from {
+    filter: drop-shadow($shadow-hover-from);
+  }
+  to {
+    filter: drop-shadow($shadow-hover-to);
   }
 }

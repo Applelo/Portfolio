@@ -43,7 +43,7 @@ export default Vue.extend({
 }
 
 .header-radiant {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: block;

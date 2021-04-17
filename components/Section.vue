@@ -3,20 +3,18 @@
     template(v-if="type === 'about'")
       h2.is-hidden {{title}}
     .section__header(v-else)
-      h2.section__title {{title}}
+      h2.section__title
+        a(:href="'#' + slug(title)") {{title}}
       button.section__rocket(@click="goToTop()" ref='rocket')
-        RocketSvg
     slot
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import slugify from "slugify";
-import RocketSvg from "~/assets/icons/rocket.svg?inline";
 
 export default Vue.extend({
   props: { title: String, type: String },
-  components: { RocketSvg },
   methods: {
     slug(str: string) {
       return slugify(str, { lower: true });
@@ -36,7 +34,7 @@ export default Vue.extend({
 <style lang="scss">
 .section {
   min-height: 100vh;
-  margin: 0 $padding;
+  padding: 0 $padding;
   position: relative;
   overflow: hidden;
 
@@ -45,10 +43,10 @@ export default Vue.extend({
   }
 
   @include m("about") {
-    height: calc(100vh - 77px);
+    min-height: calc(100vh - 77px);
 
     @include bp("grid-bigger") {
-      height: calc(100vh - 90px);
+      min-height: calc(100vh - 90px);
     }
   }
 
@@ -63,24 +61,56 @@ export default Vue.extend({
     padding-top: $padding;
   }
 
+  @include e("title") {
+    a {
+      color: color-get("white");
+      text-decoration: none;
+      @extend %text-shadow;
+    }
+  }
+
   @include e("rocket") {
-    width: $text-30-lineheight;
+    width: $text-30-lineheight + $padding * 2;
     height: $text-30-lineheight;
     -webkit-appearance: none;
     background-color: transparent;
     border: 0;
     cursor: pointer;
     padding: 0;
-    transform: rotate(0deg);
+    transform: translatex($padding) rotate(0deg);
     transition: transform linear 200ms;
+    background-size: $text-30-lineheight;
+    position: relative;
 
     @include bp("grid-bigger") {
-      width: $text-40-lineheight;
+      width: $text-40-lineheight + $padding * 2;
       height: $text-40-lineheight;
     }
 
     &:hover {
-      transform: rotate(-45deg);
+      transform: translatex($padding) rotate(-45deg);
+
+      &::before {
+        animation: anim-drop-shadow-hover $shadow-hover-anim;
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-position: center;
+      background-size: $text-30-lineheight;
+      background-repeat: no-repeat;
+      background-image: url("~/assets/icons/rocket.svg");
+      filter: drop-shadow(10px -5px 10px black);
+
+      @include bp("grid-bigger") {
+        background-size: $text-40-lineheight;
+      }
     }
   }
 }

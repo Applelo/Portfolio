@@ -1,5 +1,6 @@
 <template lang="pug">
   .wrapper
+    HeaderRadiant
     Header
     main
       Section(:title="$t('about.title')" type='about')

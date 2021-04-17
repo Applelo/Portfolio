@@ -1,6 +1,5 @@
 <template lang="pug">
   header.header#header
-    HeaderRadiant
     .header__container
       h1.header__title
         a(:href='getLocalPath' v-t="'header.title'")
@@ -13,7 +12,7 @@
           li.header__nav-item
             nuxt-link(:to="switchLocalePath(getSwitchLocalCode)") {{getSwitchLocalCode}}
           li.header__nav-item
-            Button(id="cv" :title="$t('header.nav.cv')")
+            Button(:title="$t('header.nav.cv')")
 </template>
 
 <script lang="ts">
@@ -91,7 +90,6 @@ export default Vue.extend({
 
 <style lang="scss">
 .header {
-  background-color: color-get("blue");
   position: relative;
   z-index: 2;
   width: 100%;

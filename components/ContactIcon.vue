@@ -29,7 +29,7 @@ export default Vue.extend({
   }
 }
 
-$icon-anim-duration: 60s;
+$icon-anim-duration: 120s;
 
 .contact-icon {
   display: block;
