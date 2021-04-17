@@ -21,7 +21,7 @@ export default Vue.extend({
     },
     goToTop() {
       const rocket = this.$refs.rocket as HTMLElement;
-      rocket.style.transform = 'translateY(-200%) rotate(-45deg)';
+      rocket.style.transform = 'translate(20px, -200%) rotate(-45deg)';
       setTimeout(() => {
         window.scrollTo({ behavior: 'smooth', top: 0, left: 0 });
         rocket.style.transform = '';
@@ -85,7 +85,7 @@ export default Vue.extend({
     border: 0;
     cursor: pointer;
     padding: 0;
-    transform: translatex($padding) rotate(0deg);
+    transform: translateX($padding) rotate(0deg);
     transition: transform linear 200ms;
     background-size: $text-30-lineheight;
     position: relative;
@@ -97,7 +97,7 @@ export default Vue.extend({
 
     &:hover,
     body:not(.not-touch) & {
-      transform: translatex($padding) rotate(-45deg);
+      transform: translateX($padding) rotate(-45deg);
 
       &::before {
         animation: anim-drop-shadow-hover $shadow-hover-anim;
