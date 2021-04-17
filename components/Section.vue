@@ -35,7 +35,7 @@ export default Vue.extend({
 
 <style lang="scss">
 .section {
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 $padding;
   position: relative;
   overflow: hidden;
@@ -50,6 +50,11 @@ export default Vue.extend({
     @include bp("grid-bigger") {
       height: calc(100vh - 90px);
     }
+  }
+
+  @include m("contact") {
+    display: flex;
+    flex-direction: column;
   }
 
   @include e("header") {

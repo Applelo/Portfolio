@@ -1,34 +1,35 @@
 <template lang="pug">
   .contact
-    ContactIcon(
-      type='twitter'
-      href='https://twitter.com/Applel0'
-      target='_blank'
-      @mouseover.native="changeLabelOnHover('twitter')"
-      @mouseleave.native="changeLabelOnHover(false)"
-    )
-    ContactIcon(
-      type='github'
-      href='https://github.com/Applelo'
-      target='_blank'
-      @mouseover.native="changeLabelOnHover('github')"
-       @mouseleave.native="changeLabelOnHover(false)"
-    )
-    ContactIcon(
-      type='email'
-      href='mailto:boubaultlois@gmail.com'
-      target='_blank'
-      @mouseover.native="changeLabelOnHover('email')"
-      @mouseleave.native="changeLabelOnHover(false)"
-    )
-    ContactIcon(
-      type='linkedin'
-      href='https://www.linkedin.com/in/loisboubault/'
-      target='_blank'
-      @mouseover.native="changeLabelOnHover('linkedin')"
-      @mouseleave.native="changeLabelOnHover(false)"
-    )
-    p.contact__label(ref='label')
+    .contact__container
+      ContactIcon(
+        type='twitter'
+        href='https://twitter.com/Applel0'
+        target='_blank'
+        @mouseover.native="changeLabelOnHover('twitter')"
+        @mouseleave.native="changeLabelOnHover(false)"
+      )
+      ContactIcon(
+        type='github'
+        href='https://github.com/Applelo'
+        target='_blank'
+        @mouseover.native="changeLabelOnHover('github')"
+        @mouseleave.native="changeLabelOnHover(false)"
+      )
+      ContactIcon(
+        type='email'
+        href='mailto:boubaultlois@gmail.com'
+        target='_blank'
+        @mouseover.native="changeLabelOnHover('email')"
+        @mouseleave.native="changeLabelOnHover(false)"
+      )
+      ContactIcon(
+        type='linkedin'
+        href='https://www.linkedin.com/in/loisboubault/'
+        target='_blank'
+        @mouseover.native="changeLabelOnHover('linkedin')"
+        @mouseleave.native="changeLabelOnHover(false)"
+      )
+      p.contact__label(ref='label')
 </template>
 
 <script lang="ts">
@@ -51,30 +52,46 @@ export default Vue.extend({
 
 <style lang="scss">
 .contact {
-  background: radial-gradient(
-    closest-side,
-    color-get("grey"),
-    color-get("blue")
-  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
-  background-size: 40vw 40vw;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
+  flex-grow: 1;
 
-  &::before {
-    content: "";
+  @include e("container") {
+    position: relative;
     background-color: transparent;
-    z-index: 1;
     border: 2px solid color-get("white");
     width: 50vw;
     height: 50vw;
     border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 5vw;
+
+    @include bp("grid-big") {
+      margin: 100px;
+    }
+
+    @include bp("grid-width") {
+      width: bp-get("grid-width") / 2;
+      height: bp-get("grid-width") / 2;
+    }
+
+    &::before {
+      content: "";
+      background: radial-gradient(
+        closest-side,
+        color-get("grey"),
+        color-get("blue")
+      );
+      width: 100%;
+      height: 100%;
+      background-size: 40vw 40vw;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: absolute;
+      z-index: -1;
+    }
   }
 
   @include e("label") {

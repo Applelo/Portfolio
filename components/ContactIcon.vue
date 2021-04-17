@@ -51,6 +51,11 @@ $icon-anim-duration: 60s;
     transform-origin: calc(25vw + 50px);
   }
 
+  @include bp("grid-width") {
+    left: calc(50% - #{bp-get("grid-width") / 4});
+    transform-origin: calc(#{bp-get("grid-width") / 4} + 50px);
+  }
+
   &:before {
     content: "";
     display: block;

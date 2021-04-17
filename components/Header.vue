@@ -7,8 +7,8 @@
       nav
         h2(v-t="'header.nav.title'").is-hidden
         ul.header__nav
-          template(v-for="item, index in navItems")
-            li(:class='index === 0 ? "is-hidden" : ""').header__nav-item
+          template(v-for="item in navItems")
+            li.header__nav-item
               a(v-bind:href="'#' + slug(item)") {{item}}
           li.header__nav-item
             nuxt-link(:to="switchLocalePath(getSwitchLocalCode)") {{getSwitchLocalCode}}
@@ -20,21 +20,11 @@
 import Vue from 'vue';
 import type { LocaleObject } from 'nuxt-i18n';
 import slugify from 'slugify';
-import Gumshoe from 'gumshoejs';
-
-interface GumshoeEvent extends Event {
-  detail: {
-    link: HTMLAnchorElement;
-    content: Element;
-  };
-}
 
 export default Vue.extend({
   data() {
     return {
-      previousScrollY: 0,
-      previousDirectionScrollY: 0,
-      observer: null as IntersectionObserver | null
+      observer: null as null | IntersectionObserver
     }
   },
   computed: {
@@ -60,27 +50,41 @@ export default Vue.extend({
     slug(str: string) {
       return slugify(str, {lower: true});
     },
+
+  },
+  beforeDestroy() {
+    this.observer?.disconnect();
   },
   mounted() {
-    new Gumshoe('.header__nav a');
-    document.addEventListener('gumshoeActivate', function (event) {
-      const e = event as GumshoeEvent;
-      const target = e.target as HTMLElement;
-      let hash = '';
+    this.observer = new IntersectionObserver((entries) => {
+      for (let index = 0; index < entries.length; index++) {
+        const entry = entries[index];
+        if (!entry.isIntersecting) continue;
 
-      if (!target.classList.contains('is-hidden')) {
-         // The link
-        const link = e.detail.link;
-        const href =  link.getAttribute('href');
+        const target = entry.target as HTMLElement;
+        let hash = '';
 
-        if (!href) return;
-        hash = href.split('#').join('');
+        if (!target.classList.contains('section--about')) {
+          // The link
+          const id =  target.getAttribute('id');
+
+          if (!id) return;
+          hash = id;
+        }
+
+        const url = new URL(window.location.toString());
+        url.hash = hash;
+        window.history.pushState(null, '', url.toString());
       }
+    }, {
+      threshold: .95
+    });
 
-      const url = new URL(window.location.toString());
-      url.hash = hash;
-      window.history.pushState(null, '', url.toString());
-    }, false);
+    const items = document.getElementsByClassName('section');
+    for (let index = 0; index < items.length; index++) {
+      const item = items[index];
+      this.observer.observe(item);
+    }
   },
 });
 </script>
