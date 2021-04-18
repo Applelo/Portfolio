@@ -4,7 +4,7 @@
       slot
     .about__galaxy-container
       .about__galaxy
-        button.about__cv
+        a(:href="$t('about.cv_path')" download).about__cv
           span(v-t="'about.cv_mobile'")
           span(v-t="'about.cv'")
         .about__planet.about__planet--big
@@ -58,8 +58,12 @@ export default Vue.extend({});
   }
 
   @include e('galaxy-container') {
-    padding: calc(5vw + #{$padding});
+    padding: $padding 0;
     margin: auto;
+
+    @include bp('grid-big') {
+      padding: calc(5vw + #{$padding});
+    }
 
     @include bp('grid-bigger') {
       padding: #{100px / 2 + $padding};
@@ -67,8 +71,8 @@ export default Vue.extend({});
   }
 
   @include e('galaxy') {
-    width: 50vw;
-    height: 50vw;
+    width: 80vw;
+    height: 80vw;
     background: radial-gradient(
       closest-side,
       color-get('white.2'),
@@ -81,6 +85,11 @@ export default Vue.extend({});
     border-radius: 50%;
     border: 2px solid color-get('white.7');
     position: relative;
+
+    @include bp('grid-big') {
+      width: 50vw;
+      height: 50vw;
+    }
 
     @include bp('grid-bigger') {
       width: 40vw;
@@ -124,6 +133,7 @@ export default Vue.extend({});
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
 
     &:hover,
     body.touch &,
@@ -158,6 +168,7 @@ export default Vue.extend({});
     }
 
     span {
+      text-align: center;
       position: relative;
       top: 2px;
 
@@ -188,7 +199,11 @@ export default Vue.extend({});
     left: 0;
     transform: translate(-50%, -50%);
     animation: anim-planet-rotate 30s linear infinite;
-    transform-origin: #{25vw + 6vw / 2};
+    transform-origin: #{40vw + 6vw / 2};
+
+    @include bp('grid-big') {
+      transform-origin: #{25vw + 6vw / 2};
+    }
 
     @include bp('grid-bigger') {
       transform-origin: calc(20vw + #{90px / 2});
@@ -205,7 +220,11 @@ export default Vue.extend({});
       width: 4vw;
       height: 4vw;
       left: 50% - 72% / 2;
-      transform-origin: #{(25vw * 0.72) + 4vw / 2};
+      transform-origin: #{(40vw * 0.72) + 4vw / 2};
+
+      @include bp('grid-big') {
+        transform-origin: #{(25vw * 0.72) + 4vw / 2};
+      }
 
       @include bp('grid-bigger') {
         transform-origin: calc(#{(20vw * 0.72)} + #{65px / 2});

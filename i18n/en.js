@@ -13,6 +13,7 @@ export default {
     title: 'About',
     cv: 'Download my resume',
     cv_mobile: 'Resume',
+    cv_path: '/files/cv.pdf',
   },
   projects: {
     title: 'Projects',
