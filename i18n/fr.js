@@ -4,15 +4,14 @@ export default {
     nav: {
       title: 'Navigation principale',
       items: {
-        // about: "A propos",
         projects: 'Projets',
         contact: 'Contact',
       },
-      cv: 'Cv',
     },
   },
   about: {
     title: 'A propos',
+    cv: 'Téléchargez mon CV',
   },
   projects: {
     title: 'Projets',

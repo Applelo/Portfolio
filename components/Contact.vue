@@ -71,7 +71,7 @@ export default Vue.extend({
   @include e('container') {
     position: relative;
     background-color: transparent;
-    border: 2px solid color-get('white');
+    border: 2px solid color-get('white.7');
     width: 50vw;
     height: 50vw;
     border-radius: 50%;

@@ -1,5 +1,8 @@
-Bonjour, je suis Loïs et je suis développeur web.
-Je suis actuellement à la recherche d’un emploi.
+Hello, welcome on my Portfolio, my name is Loïs and I am a web developer.
+Currently, I am looking for a job.
 
-Passionné de nouvelles technologies,
-je m’amuse à développer sur plein de plateformes et de langages différents.
+Passionate about new technologies, I have fun developing on
+different platforms and languages.
+
+To know more about me, don't hesitate to consult my resume,
+discover the [projects](#projects) and [contact me](#contact).

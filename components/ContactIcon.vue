@@ -40,7 +40,7 @@ $icon-anim-duration: 120s;
   animation: anim-icon-rotate $icon-anim-duration linear infinite;
   top: 50%;
   left: calc(50% - 25vw);
-  transform: translate3d(-50%, -50%);
+  transform: translate(-50%, -50%);
   transform-origin: 40vw - 10vw;
   background-color: color-get('white');
   z-index: 1;

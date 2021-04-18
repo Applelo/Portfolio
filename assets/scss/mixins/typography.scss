@@ -99,3 +99,79 @@
     @include list-reset;
   }
 }
+
+////
+/// Constructs $all-headings var to be used as a selector
+////
+$headings-list: 'h1', '.h1', 'h2', '.h2', 'h3', '.h3', 'h4', '.h4', 'h5', '.h5',
+  'h6', '.h6';
+$unquoted-headings-list: ();
+@each $el in $headings-list {
+  $unquoted-headings-list: append($unquoted-headings-list, unquote($el), comma);
+}
+$all-headings: $unquoted-headings-list;
+$headings-child-list: '> h1', '> .h1', '> h2', '> .h2', '> h3', '> .h3', '> h4',
+  '> .h4', '> h5', '> .h5', '> h6', '> .h6';
+$unquoted-headings-child-list: ();
+@each $el in $headings-child-list {
+  $unquoted-headings-child-list: append(
+    $unquoted-headings-child-list,
+    unquote($el),
+    comma
+  );
+}
+$all-headings-child: $unquoted-headings-child-list;
+
+////
+/// Constructs $all-md-block-els var to be used as a selector
+////
+$md-block-els-list: 'p', 'blockquote', 'ul', 'ol', 'pre', 'dl';
+$unquoted-md-block-els-list: ();
+@each $el in $md-block-els-list {
+  $unquoted-md-block-els-list: append(
+    $unquoted-md-block-els-list,
+    unquote($el),
+    comma
+  );
+}
+$all-md-block-els: $unquoted-md-block-els-list;
+$md-block-els-child-list: '> p', '> blockquote', '> ul', '> ol', '> pre', '> dl';
+$unquoted-md-block-els-child-list: ();
+@each $el in $md-block-els-child-list {
+  $unquoted-md-block-els-child-list: append(
+    $unquoted-md-block-els-child-list,
+    unquote($el),
+    comma
+  );
+}
+$all-md-block-child-els: $unquoted-md-block-els-child-list;
+
+////
+/// Adds CSS declaration blocks to contain margins on a selector
+////
+@mixin contain-margins($target: 'both') {
+  @if $target == 'first-child' or $target == 'both' {
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  @if $target == 'last-child' or $target == 'both' {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+////
+/// Adds CSS declaration blocks to contain margins on a slector's children
+////
+@mixin contain-margins-inside {
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}

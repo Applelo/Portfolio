@@ -50,10 +50,12 @@ export default Vue.extend({
   }
 
   @include m('about') {
-    min-height: calc(100vh - 77px);
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - #{77px + 90px});
 
     @include bp('grid-bigger') {
-      min-height: calc(100vh - 90px);
+      min-height: calc(100vh - #{90px + 120px});
     }
   }
 

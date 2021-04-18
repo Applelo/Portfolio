@@ -11,8 +11,6 @@
               a(v-bind:href="'#' + slug(item)") {{item}}
           li.header__nav-item
             nuxt-link(:to="switchLocalePath(getSwitchLocalCode)") {{getSwitchLocalCode}}
-          li.header__nav-item
-            Button(:title="$t('header.nav.cv')")
 </template>
 
 <script lang="ts">
@@ -112,6 +110,7 @@ export default Vue.extend({
   position: relative;
   z-index: 2;
   width: 100%;
+  margin-bottom: 90px;
 
   @include bp('grid-bigger') {
     margin-bottom: 120px;
