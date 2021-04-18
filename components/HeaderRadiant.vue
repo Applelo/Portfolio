@@ -1,5 +1,5 @@
 <template lang="pug">
-  .header-radiant#radiant
+  div(ref='radiant').header-radiant
 </template>
 
 <script lang="ts">
@@ -9,14 +9,13 @@ export default Vue.extend({
     updateRadiant(e: MouseEvent) {
       const posX = e.clientX;
       const posY = e.clientY;
-      const radiant = document.getElementById('radiant');
-      const header = document.getElementById('header');
-      const headerHeight = header?.clientHeight;
+      const radiant = this.$refs.radiant as HTMLElement;
+      const radiantHeight = radiant.clientHeight / 2;
 
       if (!radiant) return;
 
-      if (headerHeight && posY <= headerHeight) {
-        radiant.style.backgroundPositionX = `calc(${posX}px - 50vw)`;
+      if (radiantHeight && posY <= radiantHeight) {
+        radiant.style.backgroundPositionX = `calc(${posX}px)`;
       } else {
         radiant.style.backgroundPositionX = '';
       }
@@ -34,31 +33,33 @@ export default Vue.extend({
 <style lang="scss">
 @keyframes anim-header-radiant {
   from {
-    background-size: 100%;
+    background-size: 50%;
+    left: 50%;
   }
 
   to {
-    background-size: 80%;
+    background-size: 40%;
+    left: calc(50% + 5vw);
   }
 }
 
 .header-radiant {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   display: block;
-  width: 100%;
-  height: 77px * 2;
+  width: 200vw;
+  height: 25vh;
   z-index: -1;
-  background-position-x: 0;
-  background-size: 100%;
   background: radial-gradient(
     closest-side,
     color-get('grey'),
     color-get('blue')
   );
+  background-position-x: center;
+  background-size: 50%;
   background-repeat: no-repeat;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   transition: background-position-x linear 100ms;
   animation: anim-header-radiant 2s linear alternate infinite;
 }
