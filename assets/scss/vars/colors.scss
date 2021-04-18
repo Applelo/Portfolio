@@ -26,6 +26,7 @@ $shadow-hover-to: 0px 0px 20px color-get('white.5');
 %box-shadow {
   box-shadow: $shadow;
 
+  &:focus-visible,
   &:hover {
     animation: anim-box-shadow-hover $shadow-hover-anim;
   }
@@ -44,7 +45,8 @@ $shadow-hover-to: 0px 0px 20px color-get('white.5');
   text-shadow: $shadow;
 
   &:hover,
-  &.is-active {
+  &.is-active,
+  &:focus-visible {
     animation: anim-text-shadow-hover $shadow-hover-anim;
   }
 }

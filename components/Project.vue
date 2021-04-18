@@ -114,9 +114,10 @@ export default Vue.extend({
       color: color-get('white.5');
       text-decoration: underline;
 
-      &:hover {
+      &:hover,
+      &:focus-visible {
         color: color-get('white');
-        @extend %text-shadow;
+        animation: anim-text-shadow-hover $shadow-hover-anim;
       }
     }
   }
@@ -133,7 +134,8 @@ export default Vue.extend({
     border-radius: 50%;
     opacity: 0.7;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       animation: anim-box-shadow-hover $shadow-hover-anim;
       opacity: 1;
     }

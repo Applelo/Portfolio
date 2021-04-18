@@ -70,6 +70,7 @@ $icon-anim-duration: 120s;
     }
   }
 
+  &:focus-visible:before,
   &:hover:before {
     animation: anim-box-shadow-hover 1s linear infinite alternate;
   }

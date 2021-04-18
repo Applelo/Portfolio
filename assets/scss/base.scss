@@ -29,3 +29,7 @@ h2 {
   position: absolute;
   width: 1px;
 }
+
+*:focus {
+  outline: none;
+}

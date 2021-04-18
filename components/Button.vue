@@ -29,7 +29,8 @@ export default Vue.extend({
     padding: 0 $padding;
   }
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     animation: anim-button 1s linear infinite alternate;
   }
 

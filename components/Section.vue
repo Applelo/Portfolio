@@ -24,10 +24,15 @@ export default Vue.extend({
     goToTop() {
       const rocket = this.$refs.rocket as HTMLElement;
       rocket.style.transform = 'translate(20px, -200%) rotate(-45deg)';
+
+      window.scrollTo({ behavior: 'smooth', top: 0, left: 0 });
+      const headerTitleAnchor = document.querySelector(
+        '.header__title a'
+      ) as HTMLAnchorElement;
       setTimeout(() => {
-        window.scrollTo({ behavior: 'smooth', top: 0, left: 0 });
+        headerTitleAnchor.focus();
         rocket.style.transform = '';
-      }, 75);
+      }, 1000);
     },
   },
 });
@@ -98,25 +103,26 @@ export default Vue.extend({
 
   @include e('rocket') {
     width: $text-30-lineheight + $padding * 2;
-    height: $text-30-lineheight;
+    height: $text-30-lineheight + $padding * 2;
     -webkit-appearance: none;
     background-color: transparent;
     border: 0;
     cursor: pointer;
     padding: 0;
-    transform: translateX($padding) rotate(0deg);
+    transform: translate($padding, -$padding) rotate(0deg);
     transition: transform linear 200ms;
     background-size: $text-30-lineheight;
     position: relative;
 
     @include bp('grid-bigger') {
       width: $text-40-lineheight + $padding * 2;
-      height: $text-40-lineheight;
+      height: $text-40-lineheight + $padding * 2;
     }
 
     &:hover,
-    body:not(.not-touch) & {
-      transform: translateX($padding) rotate(-45deg);
+    body:not(.not-touch) &,
+    &:focus-visible {
+      transform: translate($padding, -$padding) rotate(-45deg);
 
       &::before {
         animation: anim-drop-shadow-hover $shadow-hover-anim;
