@@ -1,7 +1,7 @@
 <template lang="pug">
   .about
-    .about__text
-      slot
+    .about__text(v-if="resume")
+      nuxt-content(:document="resume")
     .about__galaxy-container
       .about__galaxy
         a(:href="$t('about.cv_path')" download).about__cv
@@ -14,9 +14,23 @@
 </template>
 
 <script lang="ts">
+import type { IContentDocument } from '@nuxt/content/types/content';
 import Vue from 'vue';
 
-export default Vue.extend({});
+export default Vue.extend({
+  data() {
+    return { resume: [] as IContentDocument[] | IContentDocument };
+  },
+  async fetch() {
+    this.resume = await this.$content(this.$i18n.locale, 'resume').fetch();
+  },
+  beforeDestroy() {
+    window.removeEventListener('updateFetch', this.$fetch);
+  },
+  mounted() {
+    window.addEventListener('updateFetch', this.$fetch);
+  },
+});
 </script>
 
 <style lang="scss">

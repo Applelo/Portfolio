@@ -1,8 +1,8 @@
 <template lang="pug">
   .projects
-    ul.projects__list
+    ul(v-if="projects").projects__list
       li(v-for="project in projects")
-        Project(
+        ProjectCard(
           :title="project.title"
           :description="project.description"
           :origin="project.origin"
@@ -12,9 +12,24 @@
 </template>
 
 <script lang="ts">
+import type { IContentDocument } from '@nuxt/content/types/content';
 import Vue from 'vue';
 export default Vue.extend({
-  props: { projects: Array },
+  data() {
+    return { projects: [] as IContentDocument[] | IContentDocument };
+  },
+  async fetch() {
+    this.projects = await this.$content(this.$i18n.locale, 'projects')
+      .without(['body'])
+      .sortBy('year', 'desc')
+      .fetch();
+  },
+  beforeDestroy() {
+    window.removeEventListener('updateFetch', this.$fetch);
+  },
+  mounted() {
+    window.addEventListener('updateFetch', this.$fetch);
+  },
 });
 </script>
 

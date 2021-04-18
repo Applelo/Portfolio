@@ -10,7 +10,7 @@
             li.header__nav-item.header__nav-item--anchor
               a(v-bind:href="'#' + slug(item)") {{item}}
           li.header__nav-item
-            nuxt-link(:to="switchLocalePath(getSwitchLocalCode)") {{getSwitchLocalCode}}
+            nuxt-link(:to="switchLocalePath(getSwitchLocalCode)" @click.native="dispatchUpdate()") {{getSwitchLocalCode}}
 </template>
 
 <script lang="ts">
@@ -44,6 +44,10 @@ export default Vue.extend({
   methods: {
     slug(str: string) {
       return slugify(str, { lower: true });
+    },
+    dispatchUpdate() {
+      const updateEvent = new CustomEvent('updateFetch');
+      window.dispatchEvent(updateEvent);
     },
   },
   beforeDestroy() {

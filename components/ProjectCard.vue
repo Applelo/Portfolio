@@ -1,13 +1,13 @@
 <template lang="pug">
-  article.project
-    .project__container
-      .project__top
-        h3.project__title {{title}}
-        p.project__year {{year}}
-      p(v-html="description").project__desc
-      .project__bottom
-        p(v-html="getOrigin").project__origin
-        a.project__link(v-if="url" :href="url" :class="`project__link--${getUrlIcon}`")
+  article.project-card
+    .project-card__container
+      .project-card__top
+        h3.project-card__title {{title}}
+        p.project-card__year {{year}}
+      p(v-html="description").project-card__desc
+      .project-card__bottom
+        p(v-html="getOrigin").project-card__origin
+        a.project-card__link(v-if="url" :href="url" :class="`project-card__link--${getUrlIcon}`")
 </template>
 
 <script lang="ts">
@@ -46,7 +46,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.project {
+.project-card {
   position: relative;
   width: 100%;
   height: 0;
