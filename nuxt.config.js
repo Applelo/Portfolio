@@ -36,6 +36,21 @@ export default {
   },
   modules: [
     [
+      '@nuxt/content',
+      {
+        markdown: {
+          remarkPlugins: [
+            'remark-squeeze-paragraphs',
+            'remark-slug',
+            'remark-autolink-headings',
+            'remark-external-links',
+            'remark-footnotes',
+            'remark-breaks',
+          ],
+        },
+      },
+    ],
+    [
       'nuxt-i18n',
       {
         locales: [

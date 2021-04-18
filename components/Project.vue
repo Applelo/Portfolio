@@ -20,7 +20,7 @@ export default Vue.extend({
     description: String,
     origin: String,
     url: String,
-    year: String,
+    year: Number,
   },
   methods: {
     prettify(str: string): string {

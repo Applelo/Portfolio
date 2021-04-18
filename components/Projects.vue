@@ -4,22 +4,17 @@
       li(v-for="project in projects")
         Project(
           :title="project.title"
-          :description="project[$i18n.locale].description"
+          :description="project.description"
           :origin="project.origin"
-          :url="project[$i18n.locale].url"
+          :url="project.url"
           :year="project.year"
         )
 </template>
 
 <script lang="ts">
-import { projects } from '~/projects';
 import Vue from 'vue';
 export default Vue.extend({
-  computed: {
-    projects() {
-      return projects.reverse();
-    },
-  },
+  props: { projects: Array },
 });
 </script>
 
