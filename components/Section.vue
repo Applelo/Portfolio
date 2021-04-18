@@ -121,8 +121,11 @@ export default Vue.extend({
       height: $text-40-lineheight + $padding * 2;
     }
 
+    body.touch & {
+      display: none;
+    }
+
     &:hover,
-    body:not(.not-touch) &,
     &:focus-visible {
       transform: translate($padding, -$padding) rotate(-45deg);
 

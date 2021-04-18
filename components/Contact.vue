@@ -88,11 +88,7 @@ export default Vue.extend({
 
     &::before {
       content: '';
-      background: radial-gradient(
-        closest-side,
-        color-get('grey'),
-        color-get('blue')
-      );
+      background: radial-gradient(closest-side, color-get('grey'), transparent);
       width: 100%;
       height: 100%;
       background-size: 50vw 50vw;

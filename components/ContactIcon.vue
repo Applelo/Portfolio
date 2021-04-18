@@ -33,19 +33,19 @@ $icon-anim-duration: 120s;
 
 .contact-icon {
   display: block;
-  width: 10vw;
-  height: 10vw;
+  width: 12vw;
+  height: 12vw;
   border-radius: 50%;
   position: absolute;
   animation: anim-icon-rotate $icon-anim-duration linear infinite;
   top: 50%;
   left: calc(50% - 25vw);
   transform: translate(-50%, -50%);
-  transform-origin: 40vw - 10vw;
+  transform-origin: 25vw + 6vw;
   background-color: color-get('white');
   z-index: 1;
 
-  @include bp('grid-big') {
+  @include bp('4') {
     width: 100px;
     height: 100px;
     transform-origin: calc(25vw + 50px);

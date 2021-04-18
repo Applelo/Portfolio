@@ -126,22 +126,22 @@ export default Vue.extend({});
     justify-content: center;
 
     &:hover,
-    body:not(.not-touch) &,
+    body.touch &,
     &:focus-visible {
       animation: anim-box-shadow-hover $shadow-hover-anim;
       background-color: color-get('white');
       color: color-get('black');
     }
 
-    body:not(.not-touch) & + .about__planet,
-    body:not(.not-touch) & + .about__planet ~ .about__planet,
+    body.touch & + .about__planet,
+    body.touch & + .about__planet ~ .about__planet,
     &:hover + .about__planet,
     &:hover + .about__planet ~ .about__planet {
       background-color: color-get('white');
     }
 
-    body:not(.not-touch) & + .about__planet:before,
-    body:not(.not-touch) & + .about__planet ~ .about__planet:before,
+    body.touch & + .about__planet:before,
+    body.touch & + .about__planet ~ .about__planet:before,
     &:hover + .about__planet:before,
     &:hover + .about__planet ~ .about__planet:before {
       content: '';
@@ -191,13 +191,13 @@ export default Vue.extend({});
     transform-origin: #{25vw + 6vw / 2};
 
     @include bp('grid-bigger') {
-      transform-origin: calc(20vw + #{100px / 2});
-      width: 100px;
-      height: 100px;
+      transform-origin: calc(20vw + #{90px / 2});
+      width: 90px;
+      height: 90px;
     }
 
     @include bp('7') {
-      transform-origin: calc(15vw + #{100px / 2});
+      transform-origin: calc(15vw + #{90px / 2});
     }
 
     @include m('small') {
@@ -208,13 +208,13 @@ export default Vue.extend({});
       transform-origin: #{(25vw * 0.72) + 4vw / 2};
 
       @include bp('grid-bigger') {
-        transform-origin: calc(#{(20vw * 0.72)} + #{75px / 2});
-        width: 75px;
-        height: 75px;
+        transform-origin: calc(#{(20vw * 0.72)} + #{65px / 2});
+        width: 65px;
+        height: 65px;
       }
 
       @include bp('7') {
-        transform-origin: calc(#{(15vw * 0.72)} + #{75px / 2});
+        transform-origin: calc(#{(15vw * 0.72)} + #{65px / 2});
       }
     }
 
