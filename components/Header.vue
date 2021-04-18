@@ -23,69 +23,82 @@ import slugify from 'slugify';
 export default Vue.extend({
   data() {
     return {
-      observer: null as null | IntersectionObserver
-    }
+      observer: null as null | IntersectionObserver,
+    };
   },
   computed: {
     navItems() {
-      const items = this.$t("header.nav.items");
+      const items = this.$t('header.nav.items');
       const map = Object.keys(items).map((item) =>
         this.$t(`header.nav.items.${item}`)
       );
       return map;
     },
     getSwitchLocalCode(): string | false {
-      const locales = this.$i18n.locales as LocaleObject[]
-      const local = locales.find(
-        (locale) => locale.code !== this.$i18n.locale
-      );
+      const locales = this.$i18n.locales as LocaleObject[];
+      const local = locales.find((locale) => locale.code !== this.$i18n.locale);
       return local ? local.code : false;
     },
-    getLocalPath():string {
+    getLocalPath(): string {
       return this.switchLocalePath(this.$i18n.locale);
-    }
+    },
   },
   methods: {
     slug(str: string) {
-      return slugify(str, {lower: true});
+      return slugify(str, { lower: true });
     },
-
   },
   beforeDestroy() {
     this.observer?.disconnect();
   },
   mounted() {
-    //TODO: fix anchor
-    this.observer = new IntersectionObserver((entries) => {
-      for (let index = 0; index < entries.length; index++) {
-        const entry = entries[index];
-        const target = entry.target as HTMLElement;
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        let intersectionRatio = 0;
+        let hash: string | false = false;
 
-        // update active
-        const hrefTitle = target.querySelector('.section__title a');
-        if (hrefTitle) hrefTitle.classList[entry.isIntersecting ? 'add' : 'remove']('is-active');
+        for (let index = 0; index < entries.length; index++) {
+          const entry = entries[index];
+          const intersectionEl = entry.target as HTMLElement;
+          const section = intersectionEl.closest('.section') as HTMLElement;
 
-        // update anchor
-        if (!entry.isIntersecting) continue;
+          // update active
+          const hrefTitle = section?.querySelector('.section__title');
+          if (hrefTitle)
+            hrefTitle.classList[entry.isIntersecting ? 'add' : 'remove'](
+              'is-active'
+            );
 
-        let hash = '';
+          // update anchor
+          if (
+            !entry.isIntersecting ||
+            intersectionRatio > entry.intersectionRatio
+          )
+            continue;
+          intersectionRatio = entry.intersectionRatio;
 
-        if (!target.classList.contains('section--about')) {
-          // The link
-          const id =  target.getAttribute('id');
-
-          if (!id) return;
-          hash = id;
+          if (section && !section.classList.contains('section--about')) {
+            // The link
+            const id = section.id;
+            if (!id) return;
+            hash = id;
+          } else {
+            hash = '';
+          }
         }
 
-        const url = new URL(window.location.toString());
-        url.hash = hash;
-        window.history.pushState(null, '', url.toString());
+        if (hash !== false) {
+          const url = new URL(window.location.toString());
+          url.hash = hash;
+          window.history.pushState(null, '', url.toString());
+        }
+      },
+      { threshold: 0 }
+    );
 
-      }
-    });
-
-    const items = document.getElementsByClassName('section');
+    const items = Array.from(
+      document.getElementsByClassName('section__intersection')
+    );
     for (let index = 0; index < items.length; index++) {
       const item = items[index];
       this.observer.observe(item);

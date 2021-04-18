@@ -1,5 +1,6 @@
 <template lang="pug">
   section(v-if="title" :class="`section--${type}`" :id='slug(title)').section
+    .section__intersection.section__intersection--top
     template(v-if="type === 'about'")
       h2.is-hidden {{title}}
     .section__header(v-else)
@@ -7,6 +8,7 @@
         a(:href="'#' + slug(title)") {{title}}
       button.section__rocket(@click="goToTop()" ref='rocket')
     slot
+    .section__intersection.section__intersection--bottom
 </template>
 
 <script lang="ts">
@@ -61,6 +63,23 @@ export default Vue.extend({
   @include m('contact') {
     display: flex;
     flex-direction: column;
+  }
+
+  @include e('intersection') {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    width: 100%;
+    height: 50vh;
+    left: 0;
+
+    @include m('top') {
+      top: 0;
+    }
+
+    @include m('bottom') {
+      bottom: 0;
+    }
   }
 
   @include e('header') {
