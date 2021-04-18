@@ -10,11 +10,13 @@
         Projects(:projects="projects")
       Section(:title="$t('contact.title')" type='contact')
         Contact
+      Rocket.rocket--mobile
     Footer
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+
 export default Vue.extend({
   async asyncData({ app, params, $content }) {
     const resume = await $content(app.i18n.locale, 'resume').fetch();
