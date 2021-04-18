@@ -12,20 +12,16 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import marked from 'marked';
+import { prettify } from '@/mixins/markdown';
 
 export default Vue.extend({
+  mixins: [prettify],
   props: {
     title: String,
     description: String,
     origin: String,
     url: String,
     year: Number,
-  },
-  methods: {
-    prettify(str: string): string {
-      return marked.parseInline(str);
-    },
   },
   computed: {
     getUrlIcon(): 'github' | 'www' | 'wordpress' {
@@ -39,6 +35,7 @@ export default Vue.extend({
     },
     getOrigin(): string {
       const origin = this.$props.origin;
+      // @ts-ignore prettify exists on mixins
       return this.prettify(this.$t(`projects.origins.${origin}`) as string);
     },
   },

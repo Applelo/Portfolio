@@ -31,4 +31,7 @@ export default {
       github: 'GitHub',
     },
   },
+  footer: {
+    credits: '[Source code](https://github.com/Applelo/Portfolio)',
+  },
 };
