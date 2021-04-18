@@ -131,8 +131,8 @@ export default Vue.extend({
 
   @include e('cv') {
     background-color: color-get('white.5');
-    width: 50%;
-    height: 50%;
+    width: 40%;
+    height: 40%;
     border-radius: 50%;
     cursor: pointer;
     position: absolute;
