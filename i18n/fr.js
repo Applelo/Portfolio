@@ -12,6 +12,7 @@ export default {
   about: {
     title: 'A propos',
     cv: 'Téléchargez mon CV',
+    cv_mobile: 'CV',
   },
   projects: {
     title: 'Projets',

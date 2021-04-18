@@ -2,13 +2,15 @@
   .about
     .about__text
       slot
-    .about__galaxy
-      button.about__cv
-        span(v-t="'about.cv'")
-      .about__planet.about__planet--big
-      .about__planet.about__planet--big
-      .about__planet.about__planet--small
-      .about__planet.about__planet--small
+    .about__galaxy-container
+      .about__galaxy
+        button.about__cv
+          span(v-t="'about.cv_mobile'")
+          span(v-t="'about.cv'")
+        .about__planet.about__planet--big
+        .about__planet.about__planet--big
+        .about__planet.about__planet--small
+        .about__planet.about__planet--small
 </template>
 
 <script lang="ts">
@@ -55,10 +57,18 @@ export default Vue.extend({});
     }
   }
 
+  @include e('galaxy-container') {
+    padding: calc(5vw + #{$padding});
+    margin: auto;
+
+    @include bp('grid-bigger') {
+      padding: #{100px / 2 + $padding};
+    }
+  }
+
   @include e('galaxy') {
     width: 50vw;
     height: 50vw;
-    margin: auto;
     background: radial-gradient(
       closest-side,
       color-get('white.2'),
@@ -123,11 +133,15 @@ export default Vue.extend({});
       color: color-get('black');
     }
 
+    body:not(.not-touch) & + .about__planet,
+    body:not(.not-touch) & + .about__planet ~ .about__planet,
     &:hover + .about__planet,
     &:hover + .about__planet ~ .about__planet {
       background-color: color-get('white');
     }
 
+    body:not(.not-touch) & + .about__planet:before,
+    body:not(.not-touch) & + .about__planet ~ .about__planet:before,
     &:hover + .about__planet:before,
     &:hover + .about__planet ~ .about__planet:before {
       content: '';
@@ -146,13 +160,27 @@ export default Vue.extend({});
     span {
       position: relative;
       top: 2px;
+
+      &:first-child {
+        @include bp('grid-big') {
+          display: none;
+        }
+      }
+
+      &:last-child {
+        display: none;
+
+        @include bp('grid-big') {
+          display: block;
+        }
+      }
     }
   }
 
   @include e('planet') {
     display: block;
-    width: 8vw;
-    height: 8vw;
+    width: 6vw;
+    height: 6vw;
     border-radius: 50%;
     background-color: color-get('grey-blue');
     position: absolute;
@@ -160,29 +188,33 @@ export default Vue.extend({});
     left: 0;
     transform: translate(-50%, -50%);
     animation: anim-planet-rotate 30s linear infinite;
-    transform-origin: #{25vw + 8vw / 2};
+    transform-origin: #{25vw + 6vw / 2};
 
     @include bp('grid-bigger') {
-      transform-origin: #{20vw + 8vw / 2};
+      transform-origin: calc(20vw + #{100px / 2});
+      width: 100px;
+      height: 100px;
     }
 
     @include bp('7') {
-      transform-origin: #{15vw + 8vw / 2};
+      transform-origin: calc(15vw + #{100px / 2});
     }
 
     @include m('small') {
       animation-direction: reverse;
-      width: 5vw;
-      height: 5vw;
+      width: 4vw;
+      height: 4vw;
       left: 50% - 72% / 2;
-      transform-origin: #{(25vw * 0.72) + 5vw / 2};
+      transform-origin: #{(25vw * 0.72) + 4vw / 2};
 
       @include bp('grid-bigger') {
-        transform-origin: #{(20vw * 0.72) + 5vw / 2};
+        transform-origin: calc(#{(20vw * 0.72)} + #{75px / 2});
+        width: 75px;
+        height: 75px;
       }
 
       @include bp('7') {
-        transform-origin: #{(15vw * 0.72) + 5vw / 2};
+        transform-origin: calc(#{(15vw * 0.72)} + #{75px / 2});
       }
     }
 
