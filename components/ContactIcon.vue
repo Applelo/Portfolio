@@ -1,5 +1,9 @@
 <template lang="pug">
-  a(:class="`contact-icon--${type}`").contact-icon
+  a(
+    :class="`contact-icon--${type}`"
+    rel="noopener"
+    :aria-label="$t(`contact.socials.${type}`)"
+  ).contact-icon
     span
 </template>
 

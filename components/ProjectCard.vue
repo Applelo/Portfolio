@@ -8,6 +8,7 @@
       .project-card__bottom
         p(v-html="getOrigin").project-card__origin
         a.project-card__link(v-if="url" :href="url" :class="`project-card__link--${getUrlIcon}`")
+          span.is-hidden {{title}}
 </template>
 
 <script lang="ts">

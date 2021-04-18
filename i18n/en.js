@@ -34,4 +34,5 @@ export default {
   footer: {
     credits: '[Source code](https://github.com/Applelo/Portfolio)',
   },
+  goToTop: 'Return to the top of the page',
 };

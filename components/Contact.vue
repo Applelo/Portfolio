@@ -45,7 +45,7 @@ export default Vue.extend({
       const label = this.$refs.label as HTMLElement;
       clearTimeout(this.labelHoverTimeout);
       if (type) {
-        label.textContent = this.$t(`contact.socials.${type}`).toString();
+        label.textContent = this.$t(`contact.socials.${type}`) as string;
         label.classList.add('is-active');
       } else {
         this.labelHoverTimeout = window.setTimeout(() => {

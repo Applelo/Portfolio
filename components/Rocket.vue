@@ -1,5 +1,6 @@
 <template lang="pug">
   button.rocket(@click="goToTop()" ref='rocket')
+    span(v-t="'goToTop'").is-hidden
 </template>
 
 <script lang="ts">
