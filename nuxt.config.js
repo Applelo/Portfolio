@@ -1,4 +1,5 @@
 export default {
+  title: 'Loïs Boubault',
   target: 'static',
   head: {
     meta: [
@@ -10,17 +11,6 @@ export default {
       {
         name: 'format-detection',
         content: 'telephone=no',
-      },
-    ],
-    link: [
-      {
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-      },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400&display=swap',
       },
     ],
   },
