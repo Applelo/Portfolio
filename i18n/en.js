@@ -1,4 +1,8 @@
 export default {
+  meta: {
+    title: 'Loïs Boubault | Portfolio',
+    description: 'Loïs Boubault Portfolio',
+  },
   header: {
     title: 'Loïs Boubault',
     nav: {
