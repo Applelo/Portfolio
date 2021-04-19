@@ -1,0 +1,177 @@
+////
+/// Calculates rem size from pixel size
+///
+/// @param {Number} $size - Size in pixels
+///
+/// @return {Number} - Corresponding size in rem
+////
+@function calculate-rem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+////
+/// Sets CSS declarations for font-size in rem units from pixel units
+///
+/// @param {Number} $size - Font size in pixels
+/// @param {Number} $line - Line height in pixels
+/// @param {Number|Bool} $letter-spacing - Letter spacing in pixels or false
+/// @param {Bool|Map} $margins - False or map of `top` and `bottom` margin values (multipliers) based on line-height
+/// @param {Bool} $margins-inside - `true` to apply margins to content elements inside or `false` to apply margins to element
+/// @param {Bool} $contain-margins - `true` to contain margins
+////
+@mixin typography-setup(
+  $size: 16px,
+  $line: 20px,
+  $letter-spacing: false,
+  $margins: (
+    'top': 1,
+    'bottom': 1,
+  ),
+  $margins-inside: false,
+  $margins-inside-direct-child-only: true,
+  $contain-margins: false
+) {
+  font-size: calculate-rem($size);
+
+  @if $line {
+    line-height: $line / $size;
+
+    @if $margins {
+      @if $margins-inside {
+        $block-els-list: if(
+          $margins-inside-direct-child-only,
+          $all-md-block-child-els,
+          $all-md-block-els
+        );
+
+        #{$block-els-list} {
+          @each $key, $val in $margins {
+            margin-#{$key}: #{($size * ($line / $size) * $val) / $size}#{'em'};
+          }
+
+          @if $contain-margins {
+            @include contain-margins;
+          }
+        }
+      } @else {
+        @each $key, $val in $margins {
+          margin-#{$key}: #{($size * ($line / $size) * $val) / $size}#{'em'};
+        }
+
+        @if $contain-margins {
+          @include contain-margins;
+        }
+      }
+    }
+  }
+
+  @if $letter-spacing and $letter-spacing != 0px and $letter-spacing != 0 {
+    // stylelint-disable-line
+    letter-spacing: ($letter-spacing / $size) + em;
+  }
+}
+
+////
+/// Sets CSS declarations for ellipsis overflow
+////
+@mixin ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+////
+/// Sets CSS declarations to reset list styles
+////
+@mixin list-reset {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+////
+/// Sets CSS declarations to reset list styles inside a CSS declaration block
+////
+@mixin lists-reset {
+  ul,
+  ol {
+    @include list-reset;
+  }
+}
+
+////
+/// Constructs $all-headings var to be used as a selector
+////
+$headings-list: 'h1', '.h1', 'h2', '.h2', 'h3', '.h3', 'h4', '.h4', 'h5', '.h5',
+  'h6', '.h6';
+$unquoted-headings-list: ();
+@each $el in $headings-list {
+  $unquoted-headings-list: append($unquoted-headings-list, unquote($el), comma);
+}
+$all-headings: $unquoted-headings-list;
+$headings-child-list: '> h1', '> .h1', '> h2', '> .h2', '> h3', '> .h3', '> h4',
+  '> .h4', '> h5', '> .h5', '> h6', '> .h6';
+$unquoted-headings-child-list: ();
+@each $el in $headings-child-list {
+  $unquoted-headings-child-list: append(
+    $unquoted-headings-child-list,
+    unquote($el),
+    comma
+  );
+}
+$all-headings-child: $unquoted-headings-child-list;
+
+////
+/// Constructs $all-md-block-els var to be used as a selector
+////
+$md-block-els-list: 'p', 'blockquote', 'ul', 'ol', 'pre', 'dl';
+$unquoted-md-block-els-list: ();
+@each $el in $md-block-els-list {
+  $unquoted-md-block-els-list: append(
+    $unquoted-md-block-els-list,
+    unquote($el),
+    comma
+  );
+}
+$all-md-block-els: $unquoted-md-block-els-list;
+$md-block-els-child-list: '> p', '> blockquote', '> ul', '> ol', '> pre', '> dl';
+$unquoted-md-block-els-child-list: ();
+@each $el in $md-block-els-child-list {
+  $unquoted-md-block-els-child-list: append(
+    $unquoted-md-block-els-child-list,
+    unquote($el),
+    comma
+  );
+}
+$all-md-block-child-els: $unquoted-md-block-els-child-list;
+
+////
+/// Adds CSS declaration blocks to contain margins on a selector
+////
+@mixin contain-margins($target: 'both') {
+  @if $target == 'first-child' or $target == 'both' {
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  @if $target == 'last-child' or $target == 'both' {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+////
+/// Adds CSS declaration blocks to contain margins on a slector's children
+////
+@mixin contain-margins-inside {
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}

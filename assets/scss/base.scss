@@ -1,0 +1,36 @@
+@import 'normalize.css/normalize.css';
+@import 'fonts.scss';
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: color-get('white');
+  background-color: color-get('blue');
+  font-family: $font-family;
+  font-weight: 400;
+}
+
+h1 {
+  @extend %h1;
+}
+
+h2 {
+  @extend %h2;
+}
+
+.is-hidden {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+*:focus {
+  outline: none;
+}

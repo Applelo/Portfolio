@@ -1,0 +1,68 @@
+$font-family: Arvo, Arial, Helvetica, sans-serif;
+
+$text-40-font-size: 40px;
+$text-40-lineheight: 50px;
+$text-40-letterspacing: 0;
+$text-40: ($text-40-font-size, $text-40-lineheight, $text-40-letterspacing);
+
+$text-35-font-size: 35px;
+$text-35-lineheight: 50px;
+$text-35-letterspacing: 0;
+$text-35: ($text-35-font-size, $text-35-lineheight, $text-35-letterspacing);
+
+$text-30-font-size: 30px;
+$text-30-lineheight: 37px;
+$text-30-letterspacing: 0;
+$text-30: ($text-30-font-size, $text-30-lineheight, $text-30-letterspacing);
+
+$text-25-font-size: 25px;
+$text-25-lineheight: 37px;
+$text-25-letterspacing: 0;
+$text-25: ($text-25-font-size, $text-25-lineheight, $text-25-letterspacing);
+
+$text-20-font-size: 20px;
+$text-20-lineheight: 25px;
+$text-20-letterspacing: 0;
+$text-20: ($text-20-font-size, $text-20-lineheight, $text-20-letterspacing);
+
+$text-15-font-size: 15px;
+$text-15-lineheight: 18px;
+$text-15-letterspacing: 0;
+$text-15: ($text-15-font-size, $text-15-lineheight, $text-15-letterspacing);
+
+%h1 {
+  @include typography-setup($text-30..., $margins: false);
+  font-weight: 700;
+  margin: 0;
+
+  @include bp('grid-bigger') {
+    @include typography-setup($text-40..., $margins: false);
+  }
+}
+
+%h2 {
+  @extend %h1;
+  text-transform: lowercase;
+}
+
+%text-nav {
+  @include typography-setup($text-25..., $margins: false);
+
+  @include bp('grid-bigger') {
+    @include typography-setup($text-35..., $margins: false);
+  }
+}
+
+%text-small {
+  @include typography-setup($text-15..., $margins: false);
+  margin: 0;
+
+  @include bp('grid-bigger') {
+    @include typography-setup($text-25..., $margins: false);
+  }
+}
+
+%text-small-italic {
+  font-style: italic;
+  @extend %text-small;
+}
