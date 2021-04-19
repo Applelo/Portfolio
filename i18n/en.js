@@ -1,7 +1,8 @@
 export default {
   meta: {
     title: 'Loïs Boubault | Portfolio',
-    description: 'Loïs Boubault Portfolio',
+    description:
+      'You can find here my resume, all my projects and how to contact me.',
   },
   header: {
     title: 'Loïs Boubault',

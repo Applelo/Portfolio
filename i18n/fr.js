@@ -1,7 +1,8 @@
 export default {
   meta: {
     title: 'Loïs Boubault | Portfolio',
-    description: 'Portfolio de Loïs Boubault',
+    description:
+      'Vous pouvez trouver ici mon CV, tous mes projets et comment me contacter.',
   },
   header: {
     title: 'Loïs Boubault',
@@ -23,7 +24,7 @@ export default {
     title: 'Projets',
     origins: {
       principal: 'Développé à [Principal](https://principal.studio)',
-      hobby: 'Developpé pendant mon temps libre',
+      hobby: 'Développé pendant mon temps libre',
     },
   },
   contact: {
