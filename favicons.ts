@@ -1,4 +1,8 @@
-export const faviconsLink = [
+interface FaviconsHead {
+  [key: string]: string;
+}
+
+export const faviconsLink: FaviconsHead[] = [
   {
     rel: 'apple-touch-icon',
     sizes: '57x57',
@@ -74,7 +78,7 @@ export const faviconsLink = [
   },
 ];
 
-export const faviconsMeta = [
+export const faviconsMeta: FaviconsHead[] = [
   {
     name: 'msapplication-TileColor',
     content: '#06081D',
