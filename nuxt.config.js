@@ -57,12 +57,12 @@ export default {
         defaultLocale: 'fr',
         langDir: '~/i18n/',
         seo: true,
-        baseUrl: process.env.DEPLOY_URL || 'http://localhost:3000',
+        baseUrl: process.env.URL || 'http://localhost:3000',
       },
     ],
   ],
   publicRuntimeConfig: {
     title,
-    baseURL: process.env.DEPLOY_URL || 'http://localhost:3000',
+    baseURL: process.env.URL || 'http://localhost:3000',
   },
 };
