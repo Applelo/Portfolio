@@ -114,7 +114,11 @@ export default Vue.extend({
   position: relative;
   z-index: 2;
   width: 100%;
-  margin-bottom: 90px;
+  margin-bottom: 45px;
+
+  @include bp('grid-big') {
+    margin-bottom: 90px;
+  }
 
   @include bp('grid-bigger') {
     margin-bottom: 120px;

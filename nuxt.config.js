@@ -1,3 +1,5 @@
+import { faviconsLink, faviconsMeta } from './favicons';
+
 export default {
   title: 'Loïs Boubault',
   target: 'static',
@@ -12,7 +14,9 @@ export default {
         name: 'format-detection',
         content: 'telephone=no',
       },
+      ...faviconsMeta,
     ],
+    link: [...faviconsLink],
   },
   components: true,
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/style-resources'],

@@ -72,7 +72,7 @@ export default Vue.extend({
   }
 
   @include e('galaxy-container') {
-    padding: $padding 0;
+    padding: $padding * 2 0;
     margin: auto;
 
     @include bp('grid-big') {
