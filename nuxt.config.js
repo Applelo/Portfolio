@@ -54,6 +54,8 @@ export default {
         strategy: 'prefix',
         defaultLocale: 'fr',
         langDir: '~/i18n/',
+        seo: true,
+        baseUrl: 'https://lois-boubault.me',
       },
     ],
   ],
