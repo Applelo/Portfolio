@@ -1,22 +1,4 @@
 <template lang="pug">
-//- Nothing in here (check default.vue)
-
+  //- Nothing in here (check default.vue)
+  SocialHead(:title="$t('meta.title')" :description="$t('meta.title')")
 </template>
-
-<script lang="ts">
-import Vue from 'vue';
-export default Vue.extend({
-  head() {
-    return {
-      title: this.$t('meta.title') as string,
-      meta: [
-        {
-          name: 'description',
-          hid: 'description',
-          content: this.$t('meta.description') as string,
-        },
-      ],
-    };
-  },
-});
-</script>

@@ -1,7 +1,9 @@
 import { faviconsLink, faviconsMeta } from './favicons';
 
+const title = 'Loïs Boubault';
+
 export default {
-  title: 'Loïs Boubault',
+  title,
   target: 'static',
   head: {
     meta: [
@@ -55,8 +57,12 @@ export default {
         defaultLocale: 'fr',
         langDir: '~/i18n/',
         seo: true,
-        baseUrl: 'https://lois-boubault.me',
+        baseUrl: process.env.DEPLOY_URL || 'http://localhost:3000',
       },
     ],
   ],
+  publicRuntimeConfig: {
+    title,
+    baseURL: process.env.DEPLOY_URL || 'http://localhost:3000',
+  },
 };
