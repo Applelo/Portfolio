@@ -1,10 +1,10 @@
 ---
 title: Fergus
 origin: principal
-year: 2021
+date: 2021-02-05
 url: https://www.fergus.bio/fr
 ---
 
-Site pour l'entreprise Fergus
+Site vitrine de vente de légume bio
 
 <!--more-->

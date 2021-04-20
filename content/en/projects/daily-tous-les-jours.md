@@ -1,10 +1,10 @@
 ---
 title: Daily Tous Les Jours
 origin: principal
-year: 2019
+date: 2019-12-20
 url: https://www.dailytouslesjours.com/en
 ---
 
-Website for Daily Tous Les Jours company
+Website to present event created by Daily Tous Les Jours
 
 <!--more-->

@@ -2,13 +2,7 @@
   .projects
     ul(v-if="projects").projects__list
       li(v-for="project in projects")
-        ProjectCard(
-          :title="project.title"
-          :description="project.description"
-          :origin="project.origin"
-          :url="project.url"
-          :year="project.year"
-        )
+        ProjectCard(:project="project")
 </template>
 
 <script lang="ts">
@@ -21,7 +15,8 @@ export default Vue.extend({
   async fetch() {
     this.projects = await this.$content(this.$i18n.locale, 'projects')
       .without(['body'])
-      .sortBy('year', 'desc')
+      .where({ not_show: { $ne: true } })
+      .sortBy('date', 'desc')
       .fetch();
   },
   beforeDestroy() {

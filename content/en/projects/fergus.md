@@ -1,10 +1,10 @@
 ---
 title: Fergus
 origin: principal
-year: 2021
+date: 2021-02-05
 url: https://www.fergus.bio/en
 ---
 
-Website for Fergus company
+Website for an organic vegetables selling company
 
 <!--more-->

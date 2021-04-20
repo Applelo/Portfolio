@@ -24,6 +24,7 @@ export default {
     title: 'Projets',
     origins: {
       principal: 'Développé à [Principal](https://principal.studio)',
+      itineraireb: 'Développé à itinéraire B',
       hobby: 'Développé pendant mon temps libre',
     },
   },
