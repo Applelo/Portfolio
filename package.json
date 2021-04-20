@@ -2,9 +2,13 @@
   "name": "portfolio",
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
     "generate": "nuxt generate",
     "start": "nuxt start"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=12",
+    "npm": ">=7"
   },
   "prettier": {
     "trailingComma": "es5",
@@ -16,6 +20,7 @@
     "@nuxt/content": "^1.14.0",
     "@nuxt/types": "^2.15.4",
     "@nuxt/typescript-build": "^2.1.0",
+    "@nuxt/typescript-runtime": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.0",
     "@nuxtjs/style-resources": "^1.0.0",
     "@types/marked": "^2.0.2",
