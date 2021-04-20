@@ -50,8 +50,8 @@ export default {
       'nuxt-i18n',
       {
         locales: [
-          { code: 'en', iso: 'en-US', file: 'en.js' },
-          { code: 'fr', iso: 'fr-FR', file: 'fr.js' },
+          { code: 'en', iso: 'en-US', file: 'en.ts' },
+          { code: 'fr', iso: 'fr-FR', file: 'fr.ts' },
         ],
         strategy: 'prefix',
         defaultLocale: 'fr',
