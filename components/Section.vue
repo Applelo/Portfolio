@@ -56,6 +56,9 @@ export default Vue.extend({
       color-get('grey'),
       color-get('blue')
     );
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
   }
 
   @include m('contact') {
