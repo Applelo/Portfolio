@@ -5,26 +5,76 @@
         p {{errorMessage}}
         p.error__back
           NuxtLink(:to="{name: 'index'}" v-t="'error.back'")
-      .error__crazy
+      .error__cats
+        img.error__cat(v-for="cat in cats" :src="cat.src" :style="cat.position")
     SocialHead(:title="errorTitle" :description="error.message")
 </template>
 
 <script lang="ts">
+interface Cat {
+  src: string;
+  position: string;
+}
+
 import Vue from 'vue';
 export default Vue.extend({
   props: ['error'],
   layout: 'errors',
-  computed: {
-    errorTitle() {
-      return this.$t('error.title', { statusCode: this.error.statusCode });
+  data() {
+    return {
+      cats: [] as Cat[],
+      interval: 0,
+      count: 0,
+    };
+  },
+  methods: {
+    async addCats() {
+      if (this.count > 60) {
+        clearInterval(this.interval);
+        return;
+      }
+      this.count++;
+
+      const src = await fetch('https://cataas.com/cat/gif')
+        .then(function (response) {
+          return response.blob();
+        })
+        .then(function (myBlob) {
+          return URL.createObjectURL(myBlob);
+        });
+
+      const cat = {
+        src,
+        position: this.randomCatPosition(),
+      };
+      this.cats.push(cat);
     },
-    errorMessage() {
+    randomCatPosition(): string {
+      const top = Math.floor(Math.random() * window.innerWidth);
+      const left = Math.floor(Math.random() * window.innerHeight);
+
+      return `top:${top.toString()}px;left:${left.toString()}px;`;
+    },
+  },
+  computed: {
+    errorTitle(): string {
+      return this.$t('error.title', {
+        statusCode: this.error.statusCode,
+      }) as string;
+    },
+    errorMessage(): string {
       const path = `error.${this.error.statusCode}`;
-      // @ts-ignore value exist
       const message = this.$t(path) as string;
-      // @ts-ignore value exist
+
       return path === message ? this.error.message : message;
     },
+  },
+  mounted() {
+    this.addCats();
+    this.interval = window.setInterval(this.addCats, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
   },
 });
 </script>
@@ -49,6 +99,13 @@ export default Vue.extend({
         }
       }
     }
+  }
+
+  @include e('cat') {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
   }
 }
 </style>
