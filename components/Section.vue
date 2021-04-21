@@ -3,9 +3,11 @@
     .section__intersection.section__intersection--top
     template(v-if="type === 'about'")
       h2.is-hidden {{title}}
+    .section__header(v-else-if="type === 'error'")
+      h2.section__title {{title}}
     .section__header(v-else)
       h2.section__title
-        a(:href="'#' + slug(title)") {{title}}
+        NuxtLink(:to="{name: 'index', hash: '#' + slug(title)}") {{title}}
       Rocket
     slot
     .section__intersection.section__intersection--bottom
@@ -36,9 +38,7 @@ export default Vue.extend({
     border-bottom: 1px solid color-get('white.2');
   }
 
-  @include m('about') {
-    display: flex;
-    flex-direction: column;
+  &:first-of-type {
     min-height: calc(100vh - #{77px + 45px});
 
     @include bp('grid-big') {
@@ -50,12 +50,43 @@ export default Vue.extend({
     }
   }
 
+  @include m('about') {
+    display: flex;
+    flex-direction: column;
+  }
+
   @include m('projects') {
-    background: radial-gradient(
-      closest-side,
-      color-get('grey'),
-      color-get('blue')
-    );
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    &::before {
+      background: color-get('blue');
+    }
+
+    &::after {
+      background: radial-gradient(
+        closest-side,
+        color-get('grey'),
+        color-get('blue')
+      );
+      background-size: 50vw 50vw;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      @include bp('grid-width') {
+        background-size: #{bp-get('grid-width') / 2} #{bp-get('grid-width') / 2};
+      }
+    }
   }
 
   @include m('contact') {
@@ -84,6 +115,11 @@ export default Vue.extend({
     display: flex;
     justify-content: space-between;
     padding-top: $padding;
+    height: $text-30-lineheight;
+
+    @include bp('grid-bigger') {
+      height: $text-40-lineheight;
+    }
   }
 
   @include e('title') {

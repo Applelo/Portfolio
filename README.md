@@ -4,23 +4,27 @@
 
 [Source Code of my portfolio](https://lois-boubault.me)
 
-This portfolio was made by scratch thanks to Nuxt.js and a lot of plugins (Nuxt content and Nuxt i18n).
+This portfolio was made on scratch thanks to Nuxt.js and a lot of plugins (Nuxt content and Nuxt i18n).
 
 ## Build
 
 This portfolio requires NPM 7 and Node 12.
 
-For dev
+First install the dependancies.
 
 ```shell
 npm i
+```
+
+To launch on dev mode
+
+```shell
 npm run dev
 ```
 
-For prod
+To launch on prod mode
 
 ```shell
-npm i
 npm run generate && npm run start
 ```
 

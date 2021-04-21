@@ -1,10 +1,11 @@
 ---
 title: Dawson
 origin: principal
-year: 2020
+date: 2020-05-03
+highlighted: true
 url: https://www.dawsonmetal.com/
 ---
 
-Website for Dawson Metal company
+Website for Dawson products and about the company
 
 <!--more-->

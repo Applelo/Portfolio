@@ -1,10 +1,11 @@
 ---
 title: Centrale des artistes
 origin: principal
-year: 2019
+date: 2019-11-28
+highlighted: true
 url: https://www.lacentraledesartistes.com
 ---
 
-Website for the Centrale des artistes
+Website for the association Centrale des artistes
 
 <!--more-->

@@ -1,8 +1,9 @@
 ---
 title: Better Admin Users Search
 origin: hobby
-year: 2019
+date: 2020-04-09
 url: https://wordpress.org/plugins/better-admin-users-search/
+highlighted: true
 ---
 
 Un plugin Wordpress pour améliorer la recherche d'utilisateurs dans l'administration

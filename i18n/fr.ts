@@ -22,8 +22,19 @@ export default {
   },
   projects: {
     title: 'Projets',
+    filters: {
+      title: 'Navigation filtres projets',
+      items: {
+        highlighted: 'Mis en avant',
+        all: 'Tous',
+        principal: 'Principal',
+        itineraireb: 'itinéraire B',
+        hobby: 'Loisir',
+      },
+    },
     origins: {
       principal: 'Développé à [Principal](https://principal.studio)',
+      itineraireb: 'Développé à itinéraire B',
       hobby: 'Développé pendant mon temps libre',
     },
   },
@@ -40,4 +51,9 @@ export default {
     credits: '[Code source](https://github.com/Applelo/Portfolio)',
   },
   goToTop: 'Retourner en haut de la page',
+  error: {
+    title: 'Erreur {statusCode}',
+    back: 'Retourner au portfolio',
+    404: 'Cette page ne peut pas être trouvé',
+  },
 };

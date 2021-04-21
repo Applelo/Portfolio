@@ -51,11 +51,7 @@ export default Vue.extend({
   width: 200vw;
   height: 25vh;
   z-index: -1;
-  background: radial-gradient(
-    closest-side,
-    color-get('grey'),
-    color-get('blue')
-  );
+  background: radial-gradient(closest-side, color-get('grey'), transparent);
   background-position-x: center;
   background-size: 50%;
   background-repeat: no-repeat;

@@ -2,13 +2,14 @@
   article.project-card
     .project-card__container
       .project-card__top
-        h3.project-card__title {{title}}
+        h3.project-card__title {{project.title}}
         p.project-card__year {{year}}
-      p(v-html="description").project-card__desc
+      p(v-html="project.description").project-card__desc
       .project-card__bottom
         p(v-html="getOrigin").project-card__origin
-        a.project-card__link(v-if="url" :href="url" :class="`project-card__link--${getUrlIcon}`")
-          span.is-hidden {{title}}
+        template(v-if="project.url")
+          a.project-card__link(:href="project.url" :class="`project-card__link--${getUrlIcon}`")
+            span.is-hidden {{project.title}}
 </template>
 
 <script lang="ts">
@@ -18,15 +19,14 @@ import { prettify } from '@/mixins/markdown';
 export default Vue.extend({
   mixins: [prettify],
   props: {
-    title: String,
-    description: String,
-    origin: String,
-    url: String,
-    year: Number,
+    project: Object,
   },
   computed: {
+    year() {
+      return new Date(this.$props.project.date).getFullYear();
+    },
     getUrlIcon(): 'github' | 'www' | 'wordpress' {
-      const url = this.$props.url;
+      const url = this.$props.project.url;
       if (url.includes('https://github.com')) {
         return 'github';
       } else if (url.includes('https://wordpress.org')) {
@@ -35,7 +35,7 @@ export default Vue.extend({
       return 'www';
     },
     getOrigin(): string {
-      const origin = this.$props.origin;
+      const origin = this.$props.project.origin;
       // @ts-ignore prettify exists on mixins
       return this.prettify(this.$t(`projects.origins.${origin}`) as string);
     },
@@ -102,6 +102,7 @@ export default Vue.extend({
     justify-content: space-between;
     margin-top: auto;
     color: color-get('white.7');
+    min-height: 60px;
   }
 
   @include e('origin') {
@@ -131,6 +132,7 @@ export default Vue.extend({
     transition: 100ms opacity linear;
     border-radius: 50%;
     opacity: 0.7;
+    flex-shrink: 0;
 
     &:hover,
     &:focus-visible {
