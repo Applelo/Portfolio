@@ -17,19 +17,19 @@ export default Vue.extend({
   props: ['options'],
   computed: {
     selected: {
-      get: function () {
+      get: function (): string {
         const filter = this.$route.query.filter;
         const path = `projects.filters.items.${
           filter ? filter : 'highlighted'
         }`;
-        return this.$t(path);
+        return this.$t(path) as string;
       },
-      set: function (payload: any) {
+      set: function (payload: any): void {
         const filter = payload.value;
         const query = filter === 'highlighted' ? {} : { filter };
-        // @ts-ignore value exist
+
         const hash = this.$i18n.locale === 'fr' ? 'projets' : 'projects';
-        // @ts-ignore value exist
+
         this.$router.push({
           query,
           hash,
