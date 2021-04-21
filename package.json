@@ -37,6 +37,7 @@
     "remark-breaks": "^2.0.2",
     "sass": "^1.32.10",
     "sass-loader": "^10.1.1",
-    "slugify": "^1.5.0"
+    "slugify": "^1.5.0",
+    "vue-select": "^3.11.2"
   }
 }

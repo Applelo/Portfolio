@@ -21,14 +21,11 @@ export default Vue.extend({
   data() {
     return { resume: [] as IContentDocument[] | IContentDocument };
   },
+  watch: {
+    '$route.path': '$fetch',
+  },
   async fetch() {
     this.resume = await this.$content(this.$i18n.locale, 'resume').fetch();
-  },
-  beforeDestroy() {
-    window.removeEventListener('updateFetch', this.$fetch);
-  },
-  mounted() {
-    window.addEventListener('updateFetch', this.$fetch);
   },
 });
 </script>

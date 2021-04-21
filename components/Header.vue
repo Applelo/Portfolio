@@ -2,15 +2,15 @@
   header.header#header
     .header__container
       h1.header__title
-        a(:href='getLocalPath' v-t="'header.title'")
+        NuxtLink(:to="{name: $route.name}" v-t="'header.title'")
       nav
         h2(v-t="'header.nav.title'").is-hidden
         ul.header__nav
-          template(v-for="item in navItems")
+          template(v-for="item, index in $t('header.nav.items')")
             li.header__nav-item.header__nav-item--anchor
               a(v-bind:href="'#' + slug(item)") {{item}}
           li.header__nav-item
-            nuxt-link(:to="switchLocalePath(getSwitchLocalCode)" @click.native="dispatchUpdate()") {{getSwitchLocalCode}}
+            NuxtLink(:to="switchLocalePath(getSwitchLocalCode)") {{getSwitchLocalCode}}
 </template>
 
 <script lang="ts">
@@ -25,29 +25,17 @@ export default Vue.extend({
     };
   },
   computed: {
-    navItems() {
-      const items = this.$t('header.nav.items');
-      const map = Object.keys(items).map((item) =>
-        this.$t(`header.nav.items.${item}`)
-      );
-      return map;
-    },
     getSwitchLocalCode(): string | false {
       const locales = this.$i18n.locales as LocaleObject[];
-      const local = locales.find((locale) => locale.code !== this.$i18n.locale);
-      return local ? local.code : false;
-    },
-    getLocalPath(): string {
-      return this.switchLocalePath(this.$i18n.locale);
+      const locale = locales.find(
+        (locale) => locale.code !== this.$i18n.locale
+      );
+      return locale ? locale.code : this.$i18n.locale;
     },
   },
   methods: {
     slug(str: string) {
       return slugify(str, { lower: true });
-    },
-    dispatchUpdate() {
-      const updateEvent = new CustomEvent('updateFetch');
-      window.dispatchEvent(updateEvent);
     },
   },
   beforeDestroy() {
@@ -149,7 +137,11 @@ export default Vue.extend({
 
   @include e('nav-item') {
     &:not(:last-child) {
-      margin-right: 35px;
+      margin-right: 22px;
+
+      @include bp('grid-big') {
+        margin-right: 35px;
+      }
     }
 
     @include m('anchor') {

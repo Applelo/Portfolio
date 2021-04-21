@@ -5,7 +5,7 @@
       h2.is-hidden {{title}}
     .section__header(v-else)
       h2.section__title
-        a(:href="'#' + slug(title)") {{title}}
+        NuxtLink(:to="{hash: slug(title)}") {{title}}
       Rocket
     slot
     .section__intersection.section__intersection--bottom
@@ -87,6 +87,11 @@ export default Vue.extend({
     display: flex;
     justify-content: space-between;
     padding-top: $padding;
+    height: $text-30-lineheight;
+
+    @include bp('grid-bigger') {
+      height: $text-40-lineheight;
+    }
   }
 
   @include e('title') {

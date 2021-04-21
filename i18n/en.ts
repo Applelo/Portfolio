@@ -22,6 +22,16 @@ export default {
   },
   projects: {
     title: 'Projects',
+    filters: {
+      title: 'Projects filters navigation',
+      items: {
+        highlighted: 'Highlighted',
+        all: 'All',
+        principal: 'Principal',
+        itineraireb: 'itinéraire B',
+        hobby: 'Hobby',
+      },
+    },
     origins: {
       principal: 'Developed at [Principal](https://principal.studio)',
       itineraireb: 'Developed at itinéraire B',

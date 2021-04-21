@@ -1,6 +1,6 @@
 ---
 title: La Shed
-origin: itineraireb
+origin: principal
 date: 2020-09-23
 url: https://www.lashedarchitecture.com/
 ---

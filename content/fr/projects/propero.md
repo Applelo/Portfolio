@@ -2,7 +2,7 @@
 title: Prospero
 origin: principal
 date: 2021-03-15
-not_show: true
+not-show: true
 ---
 
 //to do
