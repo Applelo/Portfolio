@@ -2,13 +2,13 @@
   header.header#header
     .header__container
       h1.header__title
-        NuxtLink(:to="{name: $route.name}" v-t="'header.title'")
+        NuxtLink(:to="{name: 'index'}" v-t="'header.title'")
       nav
         h2(v-t="'header.nav.title'").is-hidden
         ul.header__nav
           template(v-for="item, index in $t('header.nav.items')")
             li.header__nav-item.header__nav-item--anchor
-              a(v-bind:href="'#' + slug(item)") {{item}}
+              NuxtLink(:to="getItemLink(item)") {{item}}
           li.header__nav-item
             NuxtLink(:to="switchLocalePath(getSwitchLocalCode)") {{getSwitchLocalCode}}
 </template>
@@ -34,8 +34,8 @@ export default Vue.extend({
     },
   },
   methods: {
-    slug(str: string) {
-      return slugify(str, { lower: true });
+    getItemLink(item: string) {
+      return { name: 'index', hash: '#' + slugify(item, { lower: true }) };
     },
   },
   beforeDestroy() {

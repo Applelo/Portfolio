@@ -3,9 +3,11 @@
     .section__intersection.section__intersection--top
     template(v-if="type === 'about'")
       h2.is-hidden {{title}}
+    .section__header(v-else-if="type === 'error'")
+      h2.section__title {{title}}
     .section__header(v-else)
       h2.section__title
-        NuxtLink(:to="{hash: slug(title)}") {{title}}
+        NuxtLink(:to="{name: 'index', hash: '#' + slug(title)}") {{title}}
       Rocket
     slot
     .section__intersection.section__intersection--bottom
@@ -36,9 +38,7 @@ export default Vue.extend({
     border-bottom: 1px solid color-get('white.2');
   }
 
-  @include m('about') {
-    display: flex;
-    flex-direction: column;
+  &:first-of-type {
     min-height: calc(100vh - #{77px + 45px});
 
     @include bp('grid-big') {
@@ -48,6 +48,11 @@ export default Vue.extend({
     @include bp('grid-bigger') {
       min-height: calc(100vh - #{90px + 120px});
     }
+  }
+
+  @include m('about') {
+    display: flex;
+    flex-direction: column;
   }
 
   @include m('projects') {

@@ -51,4 +51,9 @@ export default {
     credits: '[Code source](https://github.com/Applelo/Portfolio)',
   },
   goToTop: 'Retourner en haut de la page',
+  error: {
+    title: 'Erreur {statusCode}',
+    back: 'Retourner au portfolio',
+    404: 'Cette page ne peut pas être trouvé',
+  },
 };
