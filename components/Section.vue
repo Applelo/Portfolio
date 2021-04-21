@@ -51,14 +51,37 @@ export default Vue.extend({
   }
 
   @include m('projects') {
-    background: radial-gradient(
-      closest-side,
-      color-get('grey'),
-      color-get('blue')
-    );
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: 100vw 100vh;
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    &::before {
+      background: color-get('blue');
+    }
+
+    &::after {
+      background: radial-gradient(
+        closest-side,
+        color-get('grey'),
+        color-get('blue')
+      );
+      background-size: 50vw 50vw;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      @include bp('grid-width') {
+        background-size: #{bp-get('grid-width') / 2} #{bp-get('grid-width') / 2};
+      }
+    }
   }
 
   @include m('contact') {
