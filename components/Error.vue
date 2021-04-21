@@ -6,7 +6,7 @@
         p.error__back
           NuxtLink(:to="{name: 'index'}" v-t="'error.back'")
       .error__cats
-        img.error__cat(v-for="cat in cats" :src="cat.src" :style="cat.position")
+        img.error__cat(v-for="cat in limitCats" :src="cat.src" :style="cat.position")
     SocialHead(:title="errorTitle" :description="error.message")
 </template>
 
@@ -26,36 +26,37 @@ export default Vue.extend({
       count: 0,
     };
   },
+  async fetch() {
+    const url = `https://cataas.com/api/cats?limit=50&skip=${
+      Math.random() * 100
+    }`;
+    const json = await fetch(url).then(function (response) {
+      return response.json();
+    });
+    for (let index = 0; index < json.length; index++) {
+      const item = json[index];
+      const top = Math.floor(Math.random() * 100);
+      const left = Math.floor(Math.random() * 100);
+      const cat = {
+        src: `https://cataas.com/cat/${item.id}`,
+        position: `top:${top.toString()}%;left:${left.toString()}%;`,
+      };
+      this.cats.push(cat);
+    }
+  },
   methods: {
-    async addCats() {
-      if (this.count > 60) {
+    addCat() {
+      if (this.count > 50) {
         clearInterval(this.interval);
         return;
       }
       this.count++;
-
-      const src = await fetch(`https://cataas.com/cat/gif?t=${Date.now()}`)
-        .then(function (response) {
-          return response.blob();
-        })
-        .then(function (myBlob) {
-          return URL.createObjectURL(myBlob);
-        });
-
-      const cat = {
-        src,
-        position: this.randomCatPosition(),
-      };
-      this.cats.push(cat);
-    },
-    randomCatPosition(): string {
-      const top = Math.floor(Math.random() * window.innerWidth);
-      const left = Math.floor(Math.random() * window.innerHeight);
-
-      return `top:${top.toString()}px;left:${left.toString()}px;`;
     },
   },
   computed: {
+    limitCats(): Cat[] {
+      return this.cats.slice(0, this.count);
+    },
     errorTitle(): string {
       return this.$t('error.title', {
         statusCode: this.error.statusCode,
@@ -69,8 +70,8 @@ export default Vue.extend({
     },
   },
   mounted() {
-    this.addCats();
-    this.interval = window.setInterval(this.addCats, 1000);
+    this.addCat();
+    this.interval = window.setInterval(this.addCat, 1000);
   },
   beforeDestroy() {
     clearInterval(this.interval);
