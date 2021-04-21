@@ -1,6 +1,10 @@
 <template lang="pug">
-  section(v-if="title" :class="`section--${type}`" :id='slug(title)').section
-    .section__intersection.section__intersection--top
+  section(
+    v-if="title"
+    :class="`section--${type}`"
+    :id="type === 'error' ? null : slug(title)"
+  ).section
+    div(v-if="type !== 'error'").section__intersection.section__intersection--top
     template(v-if="type === 'about'")
       h2.is-hidden {{title}}
     .section__header(v-else-if="type === 'error'")
@@ -10,7 +14,7 @@
         NuxtLink(:to="{name: 'index', hash: '#' + slug(title)}") {{title}}
       Rocket
     slot
-    .section__intersection.section__intersection--bottom
+    div(v-if="type !== 'error'").section__intersection.section__intersection--bottom
 </template>
 
 <script lang="ts">
