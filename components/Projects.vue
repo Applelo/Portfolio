@@ -66,7 +66,7 @@ export default Vue.extend({
       return {
         name: 'index',
         query,
-        hash: this.$i18n.locale === 'fr' ? 'projets' : 'projects',
+        hash: this.$i18n.locale === 'fr' ? '#projets' : '#projects',
       };
     },
   },
