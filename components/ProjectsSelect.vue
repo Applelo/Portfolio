@@ -28,7 +28,7 @@ export default Vue.extend({
         const filter = payload.value;
         const query = filter === 'highlighted' ? {} : { filter };
 
-        const hash = this.$i18n.locale === 'fr' ? 'projets' : 'projects';
+        const hash = this.$i18n.locale === 'fr' ? '#projets' : '#projects';
 
         this.$router.push({
           query,
