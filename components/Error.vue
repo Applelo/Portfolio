@@ -31,19 +31,19 @@ export default Vue.extend({
     const url = `https://cataas.com/api/cats?limit=50&skip=${
       Math.random() * 100
     }`;
-    const res = await this.$http.get(url);
+    const res = await this.$nuxt.context.$http.get(url);
     const json = (await res.json()) as any[];
-    for (let index = 0; index < json.length; index++) {
-      const item = json[index];
+    console.log('json', json);
+    this.cats = json.map((item) => {
       const top = Math.floor(Math.random() * 100);
       const left = Math.floor(Math.random() * 100);
-      const cat = {
+      return {
         src: `https://cataas.com/cat/${item.id}`,
         position: `top:${top.toString()}%;left:${left.toString()}%;`,
         id: item.id,
       };
-      this.cats.push(cat);
-    }
+    });
+    console.log(this.cats);
   },
   methods: {
     addCat() {
@@ -51,6 +51,7 @@ export default Vue.extend({
         clearInterval(this.interval);
         return;
       }
+      console.log('addCat');
       this.count++;
     },
   },
@@ -71,6 +72,7 @@ export default Vue.extend({
     },
   },
   mounted() {
+    console.log('addCat mount');
     this.addCat();
     this.interval = window.setInterval(this.addCat, 1000);
   },
