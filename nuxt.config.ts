@@ -5,6 +5,7 @@ const title = 'Loïs Boubault';
 export default {
   title,
   target: 'static',
+  ssr: false,
   head: {
     meta: [
       { charset: 'utf-8' },
@@ -31,6 +32,7 @@ export default {
     ],
   },
   modules: [
+    '@nuxt/http',
     [
       '@nuxt/content',
       {

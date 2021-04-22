@@ -4,17 +4,17 @@
     :class="`section--${type}`"
     :id="type === 'error' ? null : slug(title)"
   ).section
-    div(v-if="type !== 'error'").section__intersection.section__intersection--top
+    div(v-if="type !== 'error'" ref="intersection_top").section__intersection.section__intersection--top
     template(v-if="type === 'about'")
       h2.is-hidden {{title}}
     .section__header(v-else-if="type === 'error'")
       h2.section__title {{title}}
     .section__header(v-else)
       h2.section__title
-        NuxtLink(:to="{name: 'index', hash: '#' + slug(title)}") {{title}}
+        NuxtLink(:to="{name: 'index___' + $i18n.locale, hash: '#' + slug(title)}") {{title}}
       Rocket
     slot
-    div(v-if="type !== 'error'").section__intersection.section__intersection--bottom
+    div(v-if="type !== 'error'" ref="intersection_bottom").section__intersection.section__intersection--bottom
 </template>
 
 <script lang="ts">
@@ -22,11 +22,26 @@ import Vue from 'vue';
 import slugify from 'slugify';
 
 export default Vue.extend({
-  props: { title: String, type: String },
+  props: { title: String, type: String, observe: IntersectionObserver },
+  watch: {
+    '$props.observe': 'observeIntersection',
+  },
   methods: {
     slug(str: string) {
       return slugify(str, { lower: true });
     },
+    observeIntersection() {
+      if (this.$props.observe) {
+        const intersectionTop = this.$refs.intersection_top as HTMLElement;
+        const intersectionBottom = this.$refs
+          .intersection_bottom as HTMLElement;
+        if (intersectionTop) this.observe.observe(intersectionTop);
+        if (intersectionBottom) this.observe.observe(intersectionBottom);
+      }
+    },
+  },
+  mounted() {
+    this.observeIntersection();
   },
 });
 </script>

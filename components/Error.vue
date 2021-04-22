@@ -4,9 +4,9 @@
       .error__message
         p {{errorMessage}}
         p.error__back
-          NuxtLink(:to="{name: 'index'}" v-t="'error.back'")
+          NuxtLink(:to="{name: 'index___' + $i18n.locale}" v-t="'error.back'")
       .error__cats
-        img.error__cat(v-for="cat in limitCats" :src="cat.src" :style="cat.position")
+        img.error__cat(v-for="cat in limitCats" :key="cat.id" :src="cat.src" :style="cat.position")
     SocialHead(:title="errorTitle" :description="error.message")
 </template>
 
@@ -14,6 +14,7 @@
 interface Cat {
   src: string;
   position: string;
+  id: string;
 }
 
 import Vue from 'vue';
@@ -27,22 +28,20 @@ export default Vue.extend({
     };
   },
   async fetch() {
-    const url = `https://cataas.com/api/cats?limit=50&skip=${
+    const url = `https://cataas.com/api/cats?limit=50&tag=gif&skip=${
       Math.random() * 100
     }`;
-    const json = await fetch(url).then(function (response) {
-      return response.json();
-    });
-    for (let index = 0; index < json.length; index++) {
-      const item = json[index];
+    const res = await this.$nuxt.context.$http.get(url);
+    const json = (await res.json()) as any[];
+    this.cats = json.map((item) => {
       const top = Math.floor(Math.random() * 100);
       const left = Math.floor(Math.random() * 100);
-      const cat = {
+      return {
         src: `https://cataas.com/cat/${item.id}`,
         position: `top:${top.toString()}%;left:${left.toString()}%;`,
+        id: item.id,
       };
-      this.cats.push(cat);
-    }
+    });
   },
   methods: {
     addCat() {
