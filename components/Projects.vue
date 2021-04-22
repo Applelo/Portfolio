@@ -64,7 +64,7 @@ export default Vue.extend({
     getFilterUrl(filter: string) {
       const query = filter === 'highlighted' ? {} : { filter };
       return {
-        name: 'index',
+        name: 'index___' + this.$i18n.locale,
         query,
         hash: this.$i18n.locale === 'fr' ? '#projets' : '#projects',
       };
