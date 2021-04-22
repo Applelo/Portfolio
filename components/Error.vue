@@ -27,24 +27,6 @@ export default Vue.extend({
       count: 0,
     };
   },
-  async fetch() {
-    const url = `https://cataas.com/api/cats?limit=50&skip=${
-      Math.random() * 100
-    }`;
-    const res = await this.$nuxt.context.$http.get(url);
-    const json = (await res.json()) as any[];
-    console.log('json', json);
-    this.cats = json.map((item) => {
-      const top = Math.floor(Math.random() * 100);
-      const left = Math.floor(Math.random() * 100);
-      return {
-        src: `https://cataas.com/cat/${item.id}`,
-        position: `top:${top.toString()}%;left:${left.toString()}%;`,
-        id: item.id,
-      };
-    });
-    console.log(this.cats);
-  },
   methods: {
     addCat() {
       if (this.count > 50) {
@@ -53,6 +35,23 @@ export default Vue.extend({
       }
       console.log('addCat');
       this.count++;
+    },
+    async getCats() {
+      const url = `https://cataas.com/api/cats?limit=50&tag=gif&skip=${
+        Math.random() * 100
+      }`;
+      const res = await this.$nuxt.context.$http.get(url);
+      const json = (await res.json()) as any[];
+      const cats: Cat[] = json.map((item) => {
+        const top = Math.floor(Math.random() * 100);
+        const left = Math.floor(Math.random() * 100);
+        return {
+          src: `https://cataas.com/cat/${item.id}`,
+          position: `top:${top.toString()}%;left:${left.toString()}%;`,
+          id: item.id,
+        };
+      });
+      return cats;
     },
   },
   computed: {
@@ -72,9 +71,11 @@ export default Vue.extend({
     },
   },
   mounted() {
-    console.log('addCat mount');
-    this.addCat();
-    this.interval = window.setInterval(this.addCat, 1000);
+    this.getCats().then((cats) => {
+      this.cats = cats;
+      this.addCat();
+      this.interval = window.setInterval(this.addCat, 1000);
+    });
   },
   beforeDestroy() {
     clearInterval(this.interval);
