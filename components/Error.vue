@@ -31,7 +31,8 @@ export default Vue.extend({
     const url = `https://cataas.com/api/cats?limit=50&skip=${
       Math.random() * 100
     }`;
-    const json = await this.$http.get(url);
+    const res = await this.$http.get(url);
+    const json = (await res.json()) as any[];
     for (let index = 0; index < json.length; index++) {
       const item = json[index];
       const top = Math.floor(Math.random() * 100);
