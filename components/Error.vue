@@ -33,7 +33,6 @@ export default Vue.extend({
         clearInterval(this.interval);
         return;
       }
-      console.log('addCat');
       this.count++;
     },
     async getCats() {
