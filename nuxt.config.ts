@@ -31,6 +31,7 @@ export default {
     ],
   },
   modules: [
+    '@nuxt/http',
     [
       '@nuxt/content',
       {

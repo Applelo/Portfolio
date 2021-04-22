@@ -6,7 +6,7 @@
         p.error__back
           NuxtLink(:to="{name: 'index'}" v-t="'error.back'")
       .error__cats
-        img.error__cat(v-for="cat in limitCats" :src="cat.src" :style="cat.position")
+        img.error__cat(v-for="cat in limitCats" :key="cat.id" :src="cat.src" :style="cat.position")
     SocialHead(:title="errorTitle" :description="error.message")
 </template>
 
@@ -14,6 +14,7 @@
 interface Cat {
   src: string;
   position: string;
+  id: string;
 }
 
 import Vue from 'vue';
@@ -30,9 +31,7 @@ export default Vue.extend({
     const url = `https://cataas.com/api/cats?limit=50&skip=${
       Math.random() * 100
     }`;
-    const json = await fetch(url).then(function (response) {
-      return response.json();
-    });
+    const json = await this.$http.get(url);
     for (let index = 0; index < json.length; index++) {
       const item = json[index];
       const top = Math.floor(Math.random() * 100);
@@ -40,6 +39,7 @@ export default Vue.extend({
       const cat = {
         src: `https://cataas.com/cat/${item.id}`,
         position: `top:${top.toString()}%;left:${left.toString()}%;`,
+        id: item.id,
       };
       this.cats.push(cat);
     }
