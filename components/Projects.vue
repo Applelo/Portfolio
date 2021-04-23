@@ -9,9 +9,10 @@
           li(v-for="item, index in $t('projects.filters.items')").projects__filters-item
             NuxtLink(:to='getFilterUrl(index)') {{item}}
 
-    ul(v-if="projects").projects__list
+    ul.projects__list
       li(v-for="project in projects" :key="project.slug")
         ProjectCard(:project="project")
+    Loader(:pending="$fetchState.pending" :delay="100")
 </template>
 
 <script lang="ts">
@@ -20,8 +21,11 @@ import Vue from 'vue';
 import type VueI18n from 'vue-i18n';
 
 export default Vue.extend({
+  fetchDelay: 0,
   data() {
-    return { projects: [] as IContentDocument[] | IContentDocument };
+    return {
+      projects: [] as IContentDocument[] | IContentDocument,
+    };
   },
   watch: {
     '$route.path': '$fetch',

@@ -2,6 +2,7 @@
   .about
     .about__text(v-if="resume")
       nuxt-content(:document="resume")
+      Loader(:pending="$fetchState.pending" :delay="100")
     .about__galaxy-container
       .about__galaxy
         a(:href="$t('about.cv_path')" download).about__cv
@@ -18,6 +19,7 @@ import type { IContentDocument } from '@nuxt/content/types/content';
 import Vue from 'vue';
 
 export default Vue.extend({
+  fetchDelay: 0,
   data() {
     return { resume: [] as IContentDocument[] | IContentDocument };
   },
@@ -46,6 +48,8 @@ export default Vue.extend({
   flex-grow: 1;
 
   @include e('text') {
+    position: relative;
+
     .nuxt-content {
       @include typography-setup(
         $text-20...,
