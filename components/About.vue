@@ -1,7 +1,7 @@
 <template lang="pug">
   .about
-    .about__text(v-if="resume")
-      nuxt-content(:document="resume")
+    div(:class="$fetchState.pending ? 'about__text--pending' : ''").about__text
+      nuxt-content(v-if="resume" :document="resume")
       Loader(:pending="$fetchState.pending" :delay="100")
     .about__galaxy-container
       .about__galaxy
@@ -21,7 +21,7 @@ import Vue from 'vue';
 export default Vue.extend({
   fetchDelay: 0,
   data() {
-    return { resume: [] as IContentDocument[] | IContentDocument };
+    return { resume: null as IContentDocument[] | IContentDocument | null };
   },
   watch: {
     '$route.path': '$fetch',
@@ -49,6 +49,10 @@ export default Vue.extend({
 
   @include e('text') {
     position: relative;
+
+    @include m('pending') {
+      flex-grow: 1;
+    }
 
     .nuxt-content {
       @include typography-setup(

@@ -67,4 +67,9 @@ export default {
     title,
     baseURL: process.env.URL || 'http://localhost:3000',
   },
+  loadingIndicator: {
+    name: 'pulse',
+    color: '#FFF',
+    background: '#06081d',
+  },
 };
