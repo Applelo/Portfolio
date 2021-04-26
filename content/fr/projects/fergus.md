@@ -6,6 +6,6 @@ url: https://www.fergus.bio/fr
 highlighted: true
 ---
 
-Site vitrine de vente de légume bio
+Site vitrine de vente de légumes bio
 
 <!--more-->
