@@ -1,4 +1,4 @@
-import { faviconsLink, faviconsMeta } from './favicons';
+import { faviconsLink, faviconsMeta } from './resources/favicons';
 
 const title = 'Loïs Boubault';
 
